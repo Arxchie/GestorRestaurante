@@ -4,9 +4,9 @@
  */
 package componenteEstadisticas;
 
-import componenteProductos.IProducto;
 import java.time.LocalDate;
 import java.util.List;
+import modelo.Producto;
 
 /**
  *
@@ -14,9 +14,9 @@ import java.util.List;
  */
 public interface IServicioEstadisticas
 {
-    List<IProducto> getProductosMasVendidos(LocalDate fecha);
+    List<Producto> getProductosMasVendidos();
     double ingresosPorFecha(LocalDate fechaInicial, LocalDate fechaFinal);
     double egresosPorFecha(LocalDate fechaInicial, LocalDate fechaFinal);
-    double balancesPorFecha(LocalDate fechaInicial, LocalDate fechaFinal);
-    double totalVentasPorProducto(IProducto producto);
+    double balancePorFecha(LocalDate fecha);
+    double totalVentasPorProducto(Producto producto);
 }

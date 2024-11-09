@@ -4,6 +4,8 @@
  */
 package interfaces;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author chemo
@@ -33,9 +35,9 @@ public class Registra_Contra extends javax.swing.JFrame
         jLabel1 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jtfContra = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        jtfConfirmaContra = new javax.swing.JTextField();
         jToggleButton1 = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -52,6 +54,13 @@ public class Registra_Contra extends javax.swing.JFrame
         jButton2.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("ACEPTAR");
+        jButton2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 430, 150, 40));
 
         jLabel2.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
@@ -59,53 +68,75 @@ public class Registra_Contra extends javax.swing.JFrame
         jLabel2.setText("CONTRASEÑA");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, 130, -1));
 
-        jTextField1.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField1.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        jTextField1.addActionListener(new java.awt.event.ActionListener()
+        jtfContra.setBackground(new java.awt.Color(204, 204, 204));
+        jtfContra.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        jtfContra.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jTextField1ActionPerformed(evt);
+                jtfContraActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 310, 30));
+        jPanel1.add(jtfContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 310, 30));
 
         jLabel3.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("CONFIRMAR CONTRASEÑA");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, -1, -1));
 
-        jTextField2.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField2.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        jTextField2.addActionListener(new java.awt.event.ActionListener()
+        jtfConfirmaContra.setBackground(new java.awt.Color(204, 204, 204));
+        jtfConfirmaContra.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        jtfConfirmaContra.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jTextField2ActionPerformed(evt);
+                jtfConfirmaContraActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, 310, 30));
+        jPanel1.add(jtfConfirmaContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, 310, 30));
 
         jToggleButton1.setBackground(new java.awt.Color(207, 181, 59));
         jToggleButton1.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         jToggleButton1.setForeground(new java.awt.Color(255, 255, 255));
         jToggleButton1.setText("CANCELAR");
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jToggleButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 430, 150, 40));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 510));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jTextField1ActionPerformed
-    {//GEN-HEADEREND:event_jTextField1ActionPerformed
+    private void jtfContraActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jtfContraActionPerformed
+    {//GEN-HEADEREND:event_jtfContraActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_jtfContraActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jTextField2ActionPerformed
-    {//GEN-HEADEREND:event_jTextField2ActionPerformed
+    private void jtfConfirmaContraActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jtfConfirmaContraActionPerformed
+    {//GEN-HEADEREND:event_jtfConfirmaContraActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_jtfConfirmaContraActionPerformed
+
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jToggleButton1ActionPerformed
+    {//GEN-HEADEREND:event_jToggleButton1ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        new Login().setVisible(true);
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton2ActionPerformed
+    {//GEN-HEADEREND:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    
+    
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -159,8 +190,8 @@ public class Registra_Contra extends javax.swing.JFrame
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JTextField jtfConfirmaContra;
+    private javax.swing.JTextField jtfContra;
     // End of variables declaration//GEN-END:variables
 }

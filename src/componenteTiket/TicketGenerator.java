@@ -1,0 +1,7 @@
+
+package componenteTiket;
+
+/**
+ *
+ * @author HP
+ */

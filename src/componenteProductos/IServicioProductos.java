@@ -5,6 +5,7 @@
 package componenteProductos;
 
 import java.util.List;
+import modelo.Producto;
 
 /**
  *
@@ -12,12 +13,12 @@ import java.util.List;
  */
 public interface IServicioProductos
 {
-    void agregarProducto(IProducto producto);          
-    void eliminarProducto(long idProducto);            
-    void modificarProducto(IProducto producto);        
-    IProducto buscarProductoPorId(long idProducto);    
-    List<IProducto> getListaProductos();                 
-    IProducto buscarProductoPorNombre(String nombre);  
-    void actualizarStock(int nuevaCantidad); 
+    void agregarProducto(Producto producto);          
+    void eliminarProducto(long codigoProducto);            
+    void modificarProducto(Producto producto);        
+    Producto buscarProductoPorCodigo(long codigoProducto);    
+    List<Producto> getListaProductos();                 
+    Producto buscarProductoPorNombre(String nombre);  
+    void actualizarStock(long idProducto,int nuevaCantidad); 
     boolean productoExiste(long idProducto);        
 }

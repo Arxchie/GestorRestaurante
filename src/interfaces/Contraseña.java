@@ -4,6 +4,9 @@
  */
 package interfaces;
 
+import BD.Seguridad;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author chemo
@@ -16,6 +19,7 @@ public class Contraseña extends javax.swing.JFrame
      */
     public Contraseña()
     {
+        
         initComponents();
     }
 
@@ -34,7 +38,7 @@ public class Contraseña extends javax.swing.JFrame
         jButton2 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jToggleButton1 = new javax.swing.JToggleButton();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        jtfContrasenia = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -50,6 +54,13 @@ public class Contraseña extends javax.swing.JFrame
         jButton2.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("ACEPTAR");
+        jButton2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 430, 150, 40));
 
         jLabel2.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
@@ -61,16 +72,36 @@ public class Contraseña extends javax.swing.JFrame
         jToggleButton1.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         jToggleButton1.setForeground(new java.awt.Color(255, 255, 255));
         jToggleButton1.setText("CANCELAR");
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jToggleButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 430, 150, 40));
 
-        jPasswordField1.setBackground(new java.awt.Color(204, 204, 204));
-        jPasswordField1.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        jPanel1.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 330, 30));
+        jtfContrasenia.setBackground(new java.awt.Color(204, 204, 204));
+        jtfContrasenia.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        jPanel1.add(jtfContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 330, 30));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 510));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jToggleButton1ActionPerformed
+    {//GEN-HEADEREND:event_jToggleButton1ActionPerformed
+      
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton2ActionPerformed
+    {//GEN-HEADEREND:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+                   
+
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -125,7 +156,7 @@ public class Contraseña extends javax.swing.JFrame
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JPasswordField jtfContrasenia;
     // End of variables declaration//GEN-END:variables
 }

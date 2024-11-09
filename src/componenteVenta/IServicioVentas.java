@@ -3,6 +3,7 @@ package componenteVenta;
 
 import java.time.LocalDate;
 import java.util.List;
+import modelo.Venta;
 
 
 
@@ -13,13 +14,13 @@ import java.util.List;
 public interface IServicioVentas
 {
     void finalizarVenta(long idVenta);
-    void agregarVenta(IVenta venta);
-    IVenta buscarVentaPorId(long idVenta);
-    List<IVenta> obtenerListaVentas(); 
+    void agregarVenta(Venta venta);
+    Venta buscarVentaPorId(long idVenta);
+    List<Venta> obtenerListaVentas(); 
     boolean eliminarVenta(long idVenta); 
-    void actualizarVenta(IVenta venta); 
+    void actualizarVenta(Venta venta); 
     double calcularIngresosTotales(); 
-    List<IVenta> buscarVentasPorFecha(LocalDate fecha); 
-    List<IVenta> buscarVentasPorRangoDeFecha(LocalDate fechaInicial,LocalDate fechaFinal); 
+    List<Venta> buscarVentasPorFecha(LocalDate fecha); 
+    List<Venta> buscarVentasPorRangoDeFecha(LocalDate fechaInicial,LocalDate fechaFinal); 
     
 }
