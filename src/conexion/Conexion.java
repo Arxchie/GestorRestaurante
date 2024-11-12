@@ -1,14 +1,19 @@
-package BD;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package conexion;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ *
+ * @author chemo
+ */
 public class Conexion
 {
-
     // Ruta al archivo de base de datos Access
     private static final String PATH = "src/BD/Proyecto.accdb";
     // URL de conexión con el protocolo UCanAccess
@@ -32,11 +37,4 @@ public class Conexion
         }
         return connection;
     }
-
-    public static void main(String[] args)
-    {
-
-    }
 }
-// Clase para manejar la lógica relacionada con el usuario
-

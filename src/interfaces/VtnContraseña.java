@@ -4,20 +4,23 @@
  */
 package interfaces;
 
+
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author chemo
  */
-public class Registra_Contra extends javax.swing.JFrame
+public class VtnContraseña extends javax.swing.JFrame
 {
 
     /**
      * Creates new form Login
      */
-    public Registra_Contra()
+    public VtnContraseña()
     {
+        
         initComponents();
     }
 
@@ -32,23 +35,21 @@ public class Registra_Contra extends javax.swing.JFrame
     {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jtfContra = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jtfConfirmaContra = new javax.swing.JTextField();
         jToggleButton1 = new javax.swing.JToggleButton();
+        contrasenia = new javax.swing.JPasswordField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Logo.jpg"))); // NOI18N
-        jLabel1.setText("jLabel1");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, 140, -1));
 
         jButton2.setBackground(new java.awt.Color(207, 181, 59));
         jButton2.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
@@ -66,34 +67,7 @@ public class Registra_Contra extends javax.swing.JFrame
         jLabel2.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("CONTRASEÑA");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, 130, -1));
-
-        jtfContra.setBackground(new java.awt.Color(204, 204, 204));
-        jtfContra.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        jtfContra.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                jtfContraActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jtfContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 310, 30));
-
-        jLabel3.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("CONFIRMAR CONTRASEÑA");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, -1, -1));
-
-        jtfConfirmaContra.setBackground(new java.awt.Color(204, 204, 204));
-        jtfConfirmaContra.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        jtfConfirmaContra.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                jtfConfirmaContraActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jtfConfirmaContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, 310, 30));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 220, 120, -1));
 
         jToggleButton1.setBackground(new java.awt.Color(207, 181, 59));
         jToggleButton1.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
@@ -108,35 +82,65 @@ public class Registra_Contra extends javax.swing.JFrame
         });
         jPanel1.add(jToggleButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 430, 150, 40));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 510));
+        contrasenia.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        jPanel1.add(contrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 330, 30));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Logo.png"))); // NOI18N
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, -1, -1));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/boton rojo.png"))); // NOI18N
+        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                jLabel1MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/boton amarillo.png"))); // NOI18N
+        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                jLabel4MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, -1, -1));
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/boton verde.png"))); // NOI18N
+        jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, -1, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 500));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jtfContraActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jtfContraActionPerformed
-    {//GEN-HEADEREND:event_jtfContraActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfContraActionPerformed
-
-    private void jtfConfirmaContraActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jtfConfirmaContraActionPerformed
-    {//GEN-HEADEREND:event_jtfConfirmaContraActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfConfirmaContraActionPerformed
-
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jToggleButton1ActionPerformed
     {//GEN-HEADEREND:event_jToggleButton1ActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
-        new Login().setVisible(true);
+      
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton2ActionPerformed
     {//GEN-HEADEREND:event_jButton2ActionPerformed
         // TODO add your handling code here:
-    
-    
+                   
+
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jLabel1MouseClicked
+    {//GEN-HEADEREND:event_jLabel1MouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_jLabel1MouseClicked
+
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jLabel4MouseClicked
+    {//GEN-HEADEREND:event_jLabel4MouseClicked
+        this.setState(JFrame.ICONIFIED);
+    }//GEN-LAST:event_jLabel4MouseClicked
 
     /**
      * @param args the command line arguments
@@ -160,17 +164,23 @@ public class Registra_Contra extends javax.swing.JFrame
             }
         } catch (ClassNotFoundException ex)
         {
-            java.util.logging.Logger.getLogger(Registra_Contra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VtnContraseña.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex)
         {
-            java.util.logging.Logger.getLogger(Registra_Contra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VtnContraseña.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex)
         {
-            java.util.logging.Logger.getLogger(Registra_Contra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VtnContraseña.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex)
         {
-            java.util.logging.Logger.getLogger(Registra_Contra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VtnContraseña.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
@@ -179,19 +189,20 @@ public class Registra_Contra extends javax.swing.JFrame
         {
             public void run()
             {
-                new Registra_Contra().setVisible(true);
+                new VtnContraseña().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPasswordField contrasenia;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JTextField jtfConfirmaContra;
-    private javax.swing.JTextField jtfContra;
     // End of variables declaration//GEN-END:variables
 }

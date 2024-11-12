@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package BD;
+package dao;
 
+import conexion.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,20 +13,10 @@ import modelo.Login;
 
 /**
  *
- * @author HP
+ * @author chemo
  */
 public class LoginDAO
 {
-   public static void main(String[] args)
-   {
-        guardarUsuarioEnBD("Admin", "1234");
-        System.out.println(verificarContraseñaBD("Admin", "1234"));
-        System.out.println(cambiarContrasenia("Admin", "1111"));
-        System.out.println(cargarUsuarioPorNombre("Admin"));
-        
-        
-   }
-    
     public static void guardarUsuarioEnBD(String nombreUsuario, String contrasenia)
     {
         if (!existeUsuario(nombreUsuario))
@@ -129,5 +120,4 @@ public class LoginDAO
         }
         return false;
     }
-
 }

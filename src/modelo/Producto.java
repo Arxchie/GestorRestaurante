@@ -21,6 +21,10 @@ public class Producto
     private int cantidadStock;
     private String unidadDeMedida;
 
+    public Producto()
+    {
+    }
+
     public Producto(String nombre, String categoria, float costoCompra, float precioVenta, String descripcion, int cantidadStock, String unidadDeMedida)
     {
         this.nombre = nombre;
