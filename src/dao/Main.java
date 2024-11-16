@@ -29,7 +29,7 @@ public class Main
 //        System.out.println(cargarUsuarioPorNombre("Admin"));
         Producto nuevo = new Producto("Chilaquilez", "Plato Fuerte", 15.0f, 15.0f, "Chilaquiles Verdes", 1, "KG");
         
-        ProductoDAO.agregarProducto(nuevo);
+        //ProductoDAO.agregarProducto(nuevo);
     }
     
 }

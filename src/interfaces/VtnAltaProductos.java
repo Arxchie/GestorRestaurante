@@ -203,19 +203,19 @@ public class VtnAltaProductos extends javax.swing.JFrame
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
     {//GEN-HEADEREND:event_jButton1ActionPerformed
-        String nombreProducto = nombre.getText();
-        String categoriaSeleccionada = (String) categoria.getSelectedItem();
-        float costoProducto = Float.parseFloat(costo.getText());
-        float precioProducto = Float.parseFloat(precio.getText());
-        String descripcionProducto = descripccion.getText();
-        int cantidadProducto = Integer.parseInt(cantidad.getText());
-        String unidadDeMedidaSeleccionada = (String) medida.getSelectedItem();
-
-
-        modelo.Producto nuevoProducto = new Producto(nombreProducto, categoriaSeleccionada, costoProducto, precioProducto, descripcionProducto, cantidadProducto, unidadDeMedidaSeleccionada);
-        ProductoDAO.agregarProducto(nuevoProducto);
-        
-        Mensaje.exito(this, "Producto Agregado Con Exito");
+//        String nombreProducto = nombre.getText();
+//        String categoriaSeleccionada = (String) categoria.getSelectedItem();
+//        float costoProducto = Float.parseFloat(costo.getText());
+//        float precioProducto = Float.parseFloat(precio.getText());
+//        String descripcionProducto = descripccion.getText();
+//        int cantidadProducto = Integer.parseInt(cantidad.getText());
+//        String unidadDeMedidaSeleccionada = (String) medida.getSelectedItem();
+//
+//
+//        modelo.Producto nuevoProducto = new Producto(nombreProducto, categoriaSeleccionada, costoProducto, precioProducto, descripcionProducto, cantidadProducto, unidadDeMedidaSeleccionada);
+//        ProductoDAO.agregarProducto(nuevoProducto);
+//        
+//        Mensaje.exito(this, "Producto Agregado Con Exito");
 
 
     }//GEN-LAST:event_jButton1ActionPerformed

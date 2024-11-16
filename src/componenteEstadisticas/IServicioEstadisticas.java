@@ -16,7 +16,7 @@ public interface IServicioEstadisticas
 {
     List<Producto> getProductosMasVendidos();
     double ingresosPorFecha(LocalDate fechaInicial, LocalDate fechaFinal);
-    double egresosPorFecha(LocalDate fechaInicial, LocalDate fechaFinal);
+//    double egresosPorFecha(LocalDate fechaInicial, LocalDate fechaFinal);
     double balancePorFecha(LocalDate fecha);
     double totalVentasPorProducto(Producto producto);
 }

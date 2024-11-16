@@ -11,7 +11,6 @@ package modelo;
  */
 public class Producto 
 {
-    
     private long codigo;
     private String nombre;
     private String categoria;

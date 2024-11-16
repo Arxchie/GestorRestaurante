@@ -23,8 +23,8 @@ public class controladorProducto implements IServicioProductos
         this.productos = new ArrayList<>();
     }
 
-    @Override
-    public void agregarProducto(Producto producto)
+    
+    public void agregarProductoo(Producto producto)
     {
         if (!productoExiste(producto.getCodigo()))
         {
@@ -115,5 +115,11 @@ public class controladorProducto implements IServicioProductos
     public boolean productoExiste(long idProducto)
     {
         return buscarProductoPorCodigo(idProducto) != null;
+    }
+
+    @Override
+    public boolean agregarProducto(Producto producto)
+    {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

@@ -13,7 +13,7 @@ import modelo.Producto;
  */
 public interface IServicioProductos
 {
-    void agregarProducto(Producto producto);          
+    boolean agregarProducto(Producto producto);          
     void eliminarProducto(long codigoProducto);            
     void modificarProducto(Producto producto);        
     Producto buscarProductoPorCodigo(long codigoProducto);    
