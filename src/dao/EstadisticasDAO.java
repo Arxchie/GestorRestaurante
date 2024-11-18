@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package dao;
 
 import componenteEstadisticas.IServicioEstadisticas;
@@ -22,14 +18,19 @@ public class EstadisticasDAO implements IServicioEstadisticas
     public static void main(String[] args)
     {
         EstadisticasDAO estadisticasDAO = new EstadisticasDAO();
-        
-        estadisticasDAO.getProductosMasVendidos();
-        
+
+        //estadisticasDAO.getProductosMasVendidos();
 //        LocalDate fechaInicial = LocalDate.of(2024, 10, 1);
 //        LocalDate fechaFinal = LocalDate.of(2024, 10, 30);
 //
 //        double ingresos = estadisticasDAO.ingresosPorFecha(fechaInicial, fechaFinal);
 //        System.out.println("Los ingresos totales entre " + fechaInicial + " y " + fechaFinal + " son: $" + ingresos);
+        Producto producto = new Producto();
+        producto.setCodigo(3L); 
+
+        double totalVentas = estadisticasDAO.totalVentasPorProducto(producto);
+
+        System.out.println("El total de ventas del producto es: $" + totalVentas);
     }
 
     @Override
@@ -83,7 +84,7 @@ public class EstadisticasDAO implements IServicioEstadisticas
             {
                 if (rs.next())
                 {
-                    return rs.getDouble("Ingresos"); 
+                    return rs.getDouble("Ingresos");
                 }
             }
         } catch (SQLException e)
@@ -91,25 +92,43 @@ public class EstadisticasDAO implements IServicioEstadisticas
             System.err.println("Error al calcular los ingresos: " + e.getMessage());
         }
 
-        return 0.0; 
+        return 0.0;
     }
 
 //    @Override
 //    public double egresosPorFecha(LocalDate fechaInicial, LocalDate fechaFinal)
 //    {
 //        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+////    }
+//    @Override
+//    public double balancePorFecha(LocalDate fecha)
+//    {
+//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//
 //    }
-
-    @Override
-    public double balancePorFecha(LocalDate fecha)
-    {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
     @Override
     public double totalVentasPorProducto(Producto producto)
     {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+        String sql = "SELECT SUM(dv.Cantidad * dv.PrecioUnitario) AS TotalVentas "
+                + "FROM DetalleVenta dv "
+                + "WHERE dv.IdProducto = ?";
 
+        try (Connection conn = Conexion.conectar(); PreparedStatement pstmt = conn.prepareStatement(sql))
+        {
+            pstmt.setLong(1, producto.getCodigo());
+
+            try (ResultSet rs = pstmt.executeQuery())
+            {
+                if (rs.next())
+                {
+                    return rs.getDouble("TotalVentas");
+                }
+            }
+        } catch (SQLException e)
+        {
+            System.err.println("Error al calcular el total de ventas por producto: " + e.getMessage());
+        }
+
+        return 0.0;
+    }
 }
