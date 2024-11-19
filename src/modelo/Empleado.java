@@ -12,6 +12,14 @@ public class Empleado
     private String telefono;
     private double sueldo;
 
+    public Empleado(long id,String nombre, String direccion, String telefono, double sueldo)
+    {
+        this.id = id;
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.telefono = telefono;
+        this.sueldo = sueldo;
+    }
     public Empleado(String nombre, String direccion, String telefono, double sueldo)
     {
         this.nombre = nombre;
