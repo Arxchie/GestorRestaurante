@@ -6,6 +6,8 @@ package interfaces;
 
 import cjb.ci.Mensaje;
 import dao.ProductoDAO;
+import java.awt.Image;
+import java.awt.Toolkit;
 import javax.swing.JFrame;
 import modelo.Producto;
 
@@ -22,6 +24,13 @@ public class VtnAltaProductos extends javax.swing.JFrame
     public VtnAltaProductos()
     {
         initComponents();
+        setIconImage(getIconImage());
+    }
+    
+    public Image getIconImage()
+    {
+        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Imagenes/Logo.png"));
+        return retValue;
     }
 
     /**

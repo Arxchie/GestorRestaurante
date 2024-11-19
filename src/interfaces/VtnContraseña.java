@@ -5,6 +5,8 @@
 package interfaces;
 
 
+import java.awt.Image;
+import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -19,9 +21,15 @@ public class VtnContraseña extends javax.swing.JFrame
      * Creates new form Login
      */
     public VtnContraseña()
-    {
-        
+    {      
         initComponents();
+        setIconImage(getIconImage());
+    }
+    
+    public Image getIconImage()
+    {
+        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Imagenes/Logo.png"));
+        return retValue;
     }
 
     /**

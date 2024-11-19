@@ -6,6 +6,8 @@ package interfaces;
 
 
 import dao.LoginDAO;
+import java.awt.Image;
+import java.awt.Toolkit;
 import javax.swing.JFrame;
 import modelo.*;
 
@@ -24,8 +26,14 @@ public class VtnLogin extends javax.swing.JFrame
     public VtnLogin()
     {
         initComponents();
+        setIconImage(getIconImage());
         login = LoginDAO.cargarUsuarioPorNombre("Admin");
-
+    }
+    
+    public Image getIconImage()
+    {
+        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Imagenes/Logo.png"));
+        return retValue;
     }
 
     /**

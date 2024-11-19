@@ -4,6 +4,8 @@
  */
 package interfaces;
 
+import java.awt.Image;
+import java.awt.Toolkit;
 import javax.swing.JFrame;
 
 /**
@@ -19,6 +21,13 @@ public class VtnOpccionesAdmin extends javax.swing.JFrame
     public VtnOpccionesAdmin()
     {
         initComponents();
+        setIconImage(getIconImage());
+    }
+    
+    public Image getIconImage()
+    {
+        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Imagenes/Logo.png"));
+        return retValue;
     }
 
     /**
