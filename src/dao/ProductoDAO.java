@@ -27,14 +27,42 @@ public class ProductoDAO implements IServicioProductos
         boolean existe = false;
         long id = 3L;
         existe = productoDAO.productoExiste(id);
-        
+
         if (existe != false)
         {
             System.out.println("El producto " + id + " Existe");
-        }else
+        } else
         {
             System.out.println("El producto " + id + " No Existe");
         }
+    }
+
+    public List<Producto> obtenerTodosLosProductos()
+    {
+        List<Producto> productos = new ArrayList<>();
+        String sql = "SELECT CodigoProductos, Nombre, Categoria, Costo, Precio, Descripcion, CantidadInventario, UnidadDeMedida FROM Productos";
+
+        try (Connection conn = Conexion.conectar(); PreparedStatement pstmt = conn.prepareStatement(sql); ResultSet rs = pstmt.executeQuery())
+        {
+            while (rs.next())
+            {
+                Producto producto = new Producto();
+                producto.setCodigo(rs.getLong("CodigoProductos"));
+                producto.setNombre(rs.getString("Nombre"));
+                producto.setCategoria(rs.getString("Categoria"));
+                producto.setCostoCompra(rs.getFloat("Costo"));
+                producto.setPrecioVenta(rs.getFloat("Precio"));
+                producto.setDescripcion(rs.getString("Descripcion"));
+                producto.setCantidadStock(rs.getInt("CantidadInventario"));
+                producto.setUnidadDeMedida(rs.getString("UnidadDeMedida"));
+                productos.add(producto);
+            }
+        } catch (SQLException e)
+        {
+            System.err.println("Error al obtener los productos: " + e.getMessage());
+        }
+
+        return productos;
     }
 
     public boolean agregarProducto(Producto producto)
@@ -87,7 +115,7 @@ public class ProductoDAO implements IServicioProductos
     }
 
     @Override
-    public void modificarProducto(Producto producto)
+    public boolean modificarProducto(Producto producto)
     {
         String sql = "UPDATE Productos SET Nombre = ?, Categoria = ?, Costo = ?, Precio = ?, Descripcion = ?, CantidadInventario = ?, UnidadDeMedida = ? WHERE CodigoProductos = ?";
 
@@ -103,16 +131,11 @@ public class ProductoDAO implements IServicioProductos
             pstmt.setLong(8, producto.getCodigo());
 
             int affectedRows = pstmt.executeUpdate();
-            if (affectedRows > 0)
-            {
-                System.out.println("Producto modificado con éxito.");
-            } else
-            {
-                System.out.println("No se encontró el producto con el código especificado.");
-            }
+            return affectedRows > 0; 
         } catch (SQLException e)
         {
             System.err.println("Error al modificar el producto: " + e.getMessage());
+            return false; 
         }
     }
 
@@ -265,7 +288,7 @@ public class ProductoDAO implements IServicioProductos
 
             try (ResultSet rs = pstmt.executeQuery())
             {
-                return rs.next(); 
+                return rs.next();
             }
         } catch (SQLException e)
         {

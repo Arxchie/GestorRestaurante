@@ -51,7 +51,7 @@ public class controladorProducto implements IServicioProductos
     }
 
     @Override
-    public void modificarProducto(Producto producto)
+    public boolean modificarProducto(Producto producto)
     {
         Producto productoExistente = buscarProductoPorCodigo(producto.getCodigo());
         if (productoExistente != null)
@@ -63,6 +63,7 @@ public class controladorProducto implements IServicioProductos
         {
             System.out.println("Producto no encontrado con ID: " + producto.getCodigo());
         }
+        return false;
     }
 
     @Override

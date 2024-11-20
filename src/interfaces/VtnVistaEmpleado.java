@@ -102,7 +102,7 @@ public class VtnVistaEmpleado extends javax.swing.JFrame
         jMenu4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenuBar1.add(jMenu4);
 
-        jMenu1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jMenu1.setBorder(null);
         jMenu1.setText("Opciones");
         jMenu1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenu1.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N

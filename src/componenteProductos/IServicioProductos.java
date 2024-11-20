@@ -15,7 +15,7 @@ public interface IServicioProductos
 {
     boolean agregarProducto(Producto producto);          
     void eliminarProducto(long codigoProducto);            
-    void modificarProducto(Producto producto);        
+    boolean modificarProducto(Producto producto);        
     Producto buscarProductoPorCodigo(long codigoProducto);    
     List<Producto> getListaProductos();                 
     Producto buscarProductoPorNombre(String nombre);  
