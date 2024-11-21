@@ -57,18 +57,20 @@ public class VtnRegistra_Contra extends javax.swing.JFrame
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         btnAceptar1 = new javax.swing.JButton();
         jpfConfirmar = new javax.swing.JPasswordField();
         jpfContrasenia = new javax.swing.JPasswordField();
         jchMostrarContra = new javax.swing.JCheckBox();
         lblNoCoinciden = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
 
         jButton1.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Restaurant Esencia y Sazón");
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -86,7 +88,7 @@ public class VtnRegistra_Contra extends javax.swing.JFrame
                 btnCancelarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 430, 150, 40));
+        jPanel1.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 410, 150, 40));
 
         jLabel2.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -101,32 +103,6 @@ public class VtnRegistra_Contra extends javax.swing.JFrame
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Logo.png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, -1, -1));
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/boton rojo.png"))); // NOI18N
-        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel4.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
-                jLabel4MouseClicked(evt);
-            }
-        });
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/boton amarillo.png"))); // NOI18N
-        jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel5.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
-                jLabel5MouseClicked(evt);
-            }
-        });
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, -1, -1));
-
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/boton verde.png"))); // NOI18N
-        jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, -1, -1));
-
         btnAceptar1.setBackground(new java.awt.Color(207, 181, 59));
         btnAceptar1.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         btnAceptar1.setForeground(new java.awt.Color(255, 255, 255));
@@ -138,9 +114,9 @@ public class VtnRegistra_Contra extends javax.swing.JFrame
                 btnAceptar1ActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAceptar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 430, 150, 40));
+        jPanel1.add(btnAceptar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 410, 150, 40));
 
-        jpfConfirmar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jpfConfirmar.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jpfConfirmar.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -165,7 +141,7 @@ public class VtnRegistra_Contra extends javax.swing.JFrame
         });
         jPanel1.add(jpfConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, 310, 30));
 
-        jpfContrasenia.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jpfContrasenia.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jpfContrasenia.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -186,6 +162,7 @@ public class VtnRegistra_Contra extends javax.swing.JFrame
         });
         jPanel1.add(jpfContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 310, 30));
 
+        jchMostrarContra.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jchMostrarContra.setForeground(new java.awt.Color(255, 255, 255));
         jchMostrarContra.setText("Mostrar Contraseña");
         jchMostrarContra.addActionListener(new java.awt.event.ActionListener()
@@ -197,14 +174,35 @@ public class VtnRegistra_Contra extends javax.swing.JFrame
         });
         jPanel1.add(jchMostrarContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 360, 140, -1));
 
-        lblNoCoinciden.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblNoCoinciden.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblNoCoinciden.setForeground(new java.awt.Color(255, 102, 102));
         lblNoCoinciden.setText("Las contraseñas no coinciden");
         lblNoCoinciden.setToolTipText("");
         lblNoCoinciden.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel1.add(lblNoCoinciden, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 330, -1, 20));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 510));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 480));
+
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/boton rojo.png"))); // NOI18N
+        jMenu1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/boton amarillo.png"))); // NOI18N
+        jMenu2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jMenu2.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                jMenu2MouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jMenu2);
+
+        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/boton verde.png"))); // NOI18N
+        jMenu3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jMenuBar1.add(jMenu3);
+
+        setJMenuBar(jMenuBar1);
 
         pack();
         setLocationRelativeTo(null);
@@ -222,19 +220,9 @@ public class VtnRegistra_Contra extends javax.swing.JFrame
         this.setVisible(false);
         ventana.setVisible(true);
     }
-    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jLabel4MouseClicked
-    {//GEN-HEADEREND:event_jLabel4MouseClicked
-        System.exit(0);
-    }//GEN-LAST:event_jLabel4MouseClicked
-
-    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jLabel5MouseClicked
-    {//GEN-HEADEREND:event_jLabel5MouseClicked
-        this.setState(JFrame.ICONIFIED);
-    }//GEN-LAST:event_jLabel5MouseClicked
-
     private void btnAceptar1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnAceptar1ActionPerformed
     {//GEN-HEADEREND:event_btnAceptar1ActionPerformed
-        // TODO add your handling code here:
+
         if (ValidarDatos.validarPassword(new String(jpfContrasenia.getPassword())))
         {
             if (verificarCoincidencia(jpfContrasenia, jpfConfirmar))
@@ -257,7 +245,6 @@ public class VtnRegistra_Contra extends javax.swing.JFrame
         {
             Mensajes.error(this, "La contrasenia debe tener al menos:\n8 caracteres \n1 Minuscula \n1 Mayuscula \n1 Caracter Especial");
         }
-
 
     }//GEN-LAST:event_btnAceptar1ActionPerformed
 
@@ -328,6 +315,11 @@ public class VtnRegistra_Contra extends javax.swing.JFrame
             CtrlInterfaz.cambia(jpfContrasenia);
         }
     }//GEN-LAST:event_jpfConfirmarKeyPressed
+
+    private void jMenu2MouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jMenu2MouseClicked
+    {//GEN-HEADEREND:event_jMenu2MouseClicked
+        this.setState(JFrame.ICONIFIED);
+    }//GEN-LAST:event_jMenu2MouseClicked
     private void mostrarVerificacionCoincidencia()
     {
         if (verificarCoincidencia(jpfContrasenia, jpfConfirmar))
@@ -412,9 +404,10 @@ public class VtnRegistra_Contra extends javax.swing.JFrame
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JCheckBox jchMostrarContra;
     private javax.swing.JPasswordField jpfConfirmar;

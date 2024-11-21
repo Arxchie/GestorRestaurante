@@ -14,29 +14,10 @@ import modelo.Producto;
  */
 public class EstadisticasDAO implements IServicioEstadisticas
 {
-
-    public static void main(String[] args)
-    {
-        EstadisticasDAO estadisticasDAO = new EstadisticasDAO();
-
-        //estadisticasDAO.getProductosMasVendidos();
-//        LocalDate fechaInicial = LocalDate.of(2024, 10, 1);
-//        LocalDate fechaFinal = LocalDate.of(2024, 10, 30);
-//
-//        double ingresos = estadisticasDAO.ingresosPorFecha(fechaInicial, fechaFinal);
-//        System.out.println("Los ingresos totales entre " + fechaInicial + " y " + fechaFinal + " son: $" + ingresos);
-        Producto producto = new Producto();
-        producto.setCodigo(3L); 
-
-        double totalVentas = estadisticasDAO.totalVentasPorProducto(producto);
-
-        System.out.println("El total de ventas del producto es: $" + totalVentas);
-    }
-
     @Override
-    public List<Producto> getProductosMasVendidos()
+    public List<Object[]> getProductosMasVendidos()
     {
-        List<Producto> productosMasVendidos = new ArrayList<>();
+        List<Object[]> productosMasVendidos = new ArrayList<>();
         String sql = "SELECT p.CodigoProductos, p.Nombre, p.Categoria, p.Costo, p.Precio, p.Descripcion, p.CantidadInventario, p.UnidadDeMedida, SUM(dv.Cantidad) AS TotalVendida "
                 + "FROM Productos p "
                 + "JOIN DetalleVenta dv ON p.CodigoProductos = dv.IdProducto "
@@ -57,9 +38,14 @@ public class EstadisticasDAO implements IServicioEstadisticas
                 producto.setCantidadStock(rs.getInt("CantidadInventario"));
                 producto.setUnidadDeMedida(rs.getString("UnidadDeMedida"));
 
-                System.out.println("Producto: " + producto.getNombre() + " | Total Vendido: " + rs.getInt("TotalVendida"));
+                int totalVendida = rs.getInt("TotalVendida");
 
-                productosMasVendidos.add(producto);
+                System.out.println("Producto: " + producto.getNombre() + " | Total Vendido: " + totalVendida);
+
+                productosMasVendidos.add(new Object[]
+                {
+                    producto, totalVendida
+                });
             }
         } catch (SQLException e)
         {
@@ -67,7 +53,6 @@ public class EstadisticasDAO implements IServicioEstadisticas
         }
 
         return productosMasVendidos;
-
     }
 
     @Override
@@ -95,17 +80,6 @@ public class EstadisticasDAO implements IServicioEstadisticas
         return 0.0;
     }
 
-//    @Override
-//    public double egresosPorFecha(LocalDate fechaInicial, LocalDate fechaFinal)
-//    {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-////    }
-//    @Override
-//    public double balancePorFecha(LocalDate fecha)
-//    {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//
-//    }
     @Override
     public double totalVentasPorProducto(Producto producto)
     {
@@ -130,5 +104,58 @@ public class EstadisticasDAO implements IServicioEstadisticas
         }
 
         return 0.0;
+    }
+
+    public List<Object[]> obtenerTotalesVentasPorProducto()
+    {
+        String sql = "SELECT p.Nombre, SUM(dv.Cantidad * dv.PrecioUnitario) AS TotalVentas "
+                + "FROM DetalleVenta dv "
+                + "JOIN Productos p ON dv.IdProducto = p.CodigoProductos "
+                + "GROUP BY p.Nombre";
+
+        List<Object[]> datos = new ArrayList<>();
+
+        try (Connection conn = Conexion.conectar(); PreparedStatement pstmt = conn.prepareStatement(sql); ResultSet rs = pstmt.executeQuery())
+        {
+            while (rs.next())
+            {
+                String nombreProducto = rs.getString("Nombre");
+                double totalVentas = rs.getDouble("TotalVentas");
+                datos.add(new Object[]
+                {
+                    nombreProducto, totalVentas
+                });
+            }
+        } catch (SQLException e)
+        {
+            System.err.println("Error al obtener totales de ventas por producto: " + e.getMessage());
+        }
+
+        return datos;
+    }
+
+    public List<Object[]> getStockPorProducto()
+    {
+        String sql = "SELECT CodigoProductos, Nombre, CantidadInventario FROM Productos";
+        List<Object[]> stockPorProducto = new ArrayList<>();
+
+        try (Connection conn = Conexion.conectar(); PreparedStatement pstmt = conn.prepareStatement(sql); ResultSet rs = pstmt.executeQuery())
+        {
+            while (rs.next())
+            {
+                String nombreProducto = rs.getString("Nombre");
+                int cantidadStock = rs.getInt("CantidadInventario");
+
+                stockPorProducto.add(new Object[]
+                {
+                    nombreProducto, cantidadStock
+                });
+            }
+        } catch (SQLException e)
+        {
+            System.err.println("Error al obtener el stock por producto: " + e.getMessage());
+        }
+
+        return stockPorProducto;
     }
 }

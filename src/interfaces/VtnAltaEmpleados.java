@@ -6,23 +6,25 @@ package interfaces;
 
 import cjb.ci.CtrlInterfaz;
 import cjb.ci.Mensaje;
+import dao.EmpleadoDAO;
 import dao.ProductoDAO;
 import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
+import modelo.Empleado;
 import modelo.Producto;
 
 /**
  *
  * @author chemo
  */
-public class VtnAltaProductos extends javax.swing.JFrame
+public class VtnAltaEmpleados extends javax.swing.JFrame
 {
 
     /**
      * Creates new form VtnAltaProductos
      */
-    public VtnAltaProductos()
+    public VtnAltaEmpleados()
     {
         initComponents();
         setIconImage(getIconImage());
@@ -48,21 +50,15 @@ public class VtnAltaProductos extends javax.swing.JFrame
         jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         nombre = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        categoria = new javax.swing.JComboBox<>();
-        jLabel8 = new javax.swing.JLabel();
-        precio = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        costo = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        cantidad = new javax.swing.JTextField();
+        numero = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        medida = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         brbr = new javax.swing.JScrollPane();
-        descripccion = new javax.swing.JTextArea();
+        direccion = new javax.swing.JTextArea();
+        sueldo = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -78,8 +74,8 @@ public class VtnAltaProductos extends javax.swing.JFrame
 
         jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Alta Productos");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, -1, -1));
+        jLabel2.setText("Alta Empleados");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 30, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -89,54 +85,24 @@ public class VtnAltaProductos extends javax.swing.JFrame
         nombre.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jPanel1.add(nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 240, -1));
 
-        jLabel7.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Categoria:");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
-
-        categoria.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        categoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Entradas", "Platos Fuertes", "Comida Rapida", "Bebidas", "Postres", "Desayunos" }));
-        jPanel1.add(categoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 165, 210, 30));
-
-        jLabel8.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Costo:");
-        jLabel8.setToolTipText("");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, -1, 40));
-
-        precio.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jPanel1.add(precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 220, 80, -1));
-
-        jLabel9.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Precio:");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 210, -1, 40));
-
-        costo.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jPanel1.add(costo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 80, -1));
-
         jLabel10.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("Descripccion:");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, -1, -1));
+        jLabel10.setText("Direccion:");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
 
         jLabel11.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setText("Cantidad:");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, -1, 40));
+        jLabel11.setText("Telefono:");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, -1, 40));
 
-        cantidad.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jPanel1.add(cantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 450, 220, -1));
+        numero.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jPanel1.add(numero, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 350, 230, -1));
 
         jLabel12.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel12.setText("Unidad de Medida:");
+        jLabel12.setText("Sueldo:");
         jLabel12.setToolTipText("");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 490, -1, 40));
-
-        medida.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        medida.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pieza", "Kilogramos", "Litros" }));
-        jPanel1.add(medida, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 500, 110, -1));
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, -1, 40));
 
         jButton1.setBackground(new java.awt.Color(207, 181, 59));
         jButton1.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
@@ -165,12 +131,15 @@ public class VtnAltaProductos extends javax.swing.JFrame
         });
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 560, 140, 30));
 
-        descripccion.setColumns(20);
-        descripccion.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        descripccion.setRows(5);
-        brbr.setViewportView(descripccion);
+        direccion.setColumns(20);
+        direccion.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        direccion.setRows(5);
+        brbr.setViewportView(direccion);
 
-        jPanel1.add(brbr, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 350, 140));
+        jPanel1.add(brbr, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 350, 120));
+
+        sueldo.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jPanel1.add(sueldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 420, 250, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 650));
 
@@ -208,46 +177,57 @@ public class VtnAltaProductos extends javax.swing.JFrame
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
     {//GEN-HEADEREND:event_jButton1ActionPerformed
-        String nombreProducto = nombre.getText();
-        String categoriaSeleccionada = (String) categoria.getSelectedItem();
-        String descripcionProducto = descripccion.getText();
-        String unidadDeMedidaSeleccionada = (String) medida.getSelectedItem();
+        String nombreIngresado = nombre.getText();
+        String direccionIngresado = direccion.getText();
+        String numeroIngresado = numero.getText();
+        String sueldoTexto = sueldo.getText();
 
-        float costoProducto;
-        float precioProducto;
-        int cantidadProducto;
-        try
+
+        if (!numeroIngresado.matches("\\d{10}"))
         {
-            costoProducto = Float.parseFloat(costo.getText());
-            precioProducto = Float.parseFloat(precio.getText());
-            cantidadProducto = Integer.parseInt(cantidad.getText());
-        } catch (NumberFormatException e)
-        {
-            Mensaje.error(this, "Los valores de costo, precio y cantidad deben ser numéricos.");
-            CtrlInterfaz.limpia(costo, precio, cantidad);
+            Mensaje.error(this, "El número debe tener exactamente 10 dígitos y solo contener números.");
+            CtrlInterfaz.limpia(numero);
             return; 
         }
 
-        ProductoDAO productoDAO = new ProductoDAO();
-
-        if (productoDAO.existeNombreProducto(nombreProducto))
+        double sueldoIngresado;
+        try
         {
-            Mensaje.error(this, "El producto con el nombre ingresado ya existe. Por favor, ingrese un nombre diferente.");
+            sueldoIngresado = Double.parseDouble(sueldoTexto);
+        } catch (NumberFormatException e)
+        {
+            Mensaje.error(this, "El sueldo debe ser un valor numérico.");
+            CtrlInterfaz.limpia(sueldo);
+            return; 
+        }
+
+        EmpleadoDAO empleadoDAO = new EmpleadoDAO();
+
+
+        if (empleadoDAO.existeNombre(nombreIngresado))
+        {
+            Mensaje.error(this, "El nombre ingresado ya existe. Por favor, ingrese un nombre diferente.");
             CtrlInterfaz.limpia(nombre);
             return; 
         }
 
-        modelo.Producto nuevoProducto = new Producto(nombreProducto, categoriaSeleccionada, costoProducto, precioProducto, descripcionProducto, cantidadProducto, unidadDeMedidaSeleccionada);
-        productoDAO.agregarProducto(nuevoProducto);
+        if (empleadoDAO.existeNumero(numeroIngresado))
+        {
+            Mensaje.error(this, "El número ingresado ya existe. Por favor, ingrese un número diferente.");
+            CtrlInterfaz.limpia(numero);
+            return; 
+        }
 
-        Mensaje.exito(this, "Producto agregado con éxito.");
+        modelo.Empleado nuevoEmpleado = new Empleado(nombreIngresado, direccionIngresado, numeroIngresado, sueldoIngresado);
+        empleadoDAO.agregarEmpleado(nuevoEmpleado);
 
-        CtrlInterfaz.limpia(nombre, categoria, costo, precio, descripccion, cantidad, medida);
+        Mensaje.exito(this, "Empleado " + nombreIngresado + " registrado con éxito.");
+        CtrlInterfaz.limpia(nombre, direccion, numero, sueldo);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton2ActionPerformed
     {//GEN-HEADEREND:event_jButton2ActionPerformed
-        CtrlInterfaz.limpia(nombre, categoria, costo, precio, descripccion, cantidad, medida);
+        CtrlInterfaz.limpia(nombre, direccion, numero, sueldo);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jMenu1MouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jMenu1MouseClicked
@@ -282,17 +262,18 @@ public class VtnAltaProductos extends javax.swing.JFrame
             }
         } catch (ClassNotFoundException ex)
         {
-            java.util.logging.Logger.getLogger(VtnAltaProductos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VtnAltaEmpleados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex)
         {
-            java.util.logging.Logger.getLogger(VtnAltaProductos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VtnAltaEmpleados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex)
         {
-            java.util.logging.Logger.getLogger(VtnAltaProductos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VtnAltaEmpleados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex)
         {
-            java.util.logging.Logger.getLogger(VtnAltaProductos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VtnAltaEmpleados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
@@ -300,17 +281,14 @@ public class VtnAltaProductos extends javax.swing.JFrame
         {
             public void run()
             {
-                new VtnAltaProductos().setVisible(true);
+                new VtnAltaEmpleados().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane brbr;
-    private javax.swing.JTextField cantidad;
-    private javax.swing.JComboBox<String> categoria;
-    private javax.swing.JTextField costo;
-    private javax.swing.JTextArea descripccion;
+    private javax.swing.JTextArea direccion;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel10;
@@ -318,16 +296,13 @@ public class VtnAltaProductos extends javax.swing.JFrame
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JComboBox<String> medida;
     private javax.swing.JTextField nombre;
-    private javax.swing.JTextField precio;
+    private javax.swing.JTextField numero;
+    private javax.swing.JTextField sueldo;
     // End of variables declaration//GEN-END:variables
 }

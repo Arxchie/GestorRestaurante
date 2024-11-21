@@ -17,26 +17,6 @@ import java.util.List;
  */
 public class ProductoDAO implements IServicioProductos
 {
-
-    public static void main(String[] args)
-    {
-        ProductoDAO productoDAO = new ProductoDAO();
-        //Producto producto = new Producto("h5hrhrh", "trhrthh", 45f, 67f, "rtnrnrn", 1, "nrnrn");
-        //List<Producto> productos = productoDAO.getListaProductos();
-
-        boolean existe = false;
-        long id = 3L;
-        existe = productoDAO.productoExiste(id);
-
-        if (existe != false)
-        {
-            System.out.println("El producto " + id + " Existe");
-        } else
-        {
-            System.out.println("El producto " + id + " No Existe");
-        }
-    }
-
     public List<Producto> obtenerTodosLosProductos()
     {
         List<Producto> productos = new ArrayList<>();
@@ -131,11 +111,11 @@ public class ProductoDAO implements IServicioProductos
             pstmt.setLong(8, producto.getCodigo());
 
             int affectedRows = pstmt.executeUpdate();
-            return affectedRows > 0; 
+            return affectedRows > 0;
         } catch (SQLException e)
         {
             System.err.println("Error al modificar el producto: " + e.getMessage());
-            return false; 
+            return false;
         }
     }
 
@@ -296,4 +276,28 @@ public class ProductoDAO implements IServicioProductos
             return false;
         }
     }
+
+    @Override
+    public boolean existeNombreProducto(String nombre)
+    {
+        String sql = "SELECT COUNT(*) AS total FROM Productos WHERE Nombre = ?";
+
+        try (Connection conn = Conexion.conectar(); PreparedStatement pstmt = conn.prepareStatement(sql))
+        {
+            pstmt.setString(1, nombre);
+
+            try (ResultSet rs = pstmt.executeQuery())
+            {
+                if (rs.next())
+                {
+                    return rs.getInt("total") > 0; 
+                }
+            }
+        } catch (SQLException e)
+        {
+            System.err.println("Error al verificar el nombre del producto: " + e.getMessage());
+        }
+        return false; 
+    }
+
 }
