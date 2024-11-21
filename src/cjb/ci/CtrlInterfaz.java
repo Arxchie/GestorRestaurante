@@ -13,6 +13,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
@@ -120,6 +121,10 @@ public class CtrlInterfaz
         if (obj instanceof JTextArea)
         {
             ((JTextArea) obj).requestFocus();
+        }
+        if (obj instanceof JPasswordField)
+        {
+            ((JPasswordField) obj).requestFocus();
         }
     }
 
