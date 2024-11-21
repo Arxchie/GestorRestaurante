@@ -4,11 +4,14 @@
  */
 package interfaces;
 
-
+import controlador.controladorLogin;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -21,11 +24,11 @@ public class VtnContraseña extends javax.swing.JFrame
      * Creates new form Login
      */
     public VtnContraseña()
-    {      
+    {
         initComponents();
         setIconImage(getIconImage());
     }
-    
+
     public Image getIconImage()
     {
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Imagenes/Logo.png"));
@@ -43,14 +46,15 @@ public class VtnContraseña extends javax.swing.JFrame
     {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jToggleButton1 = new javax.swing.JToggleButton();
-        contrasenia = new javax.swing.JPasswordField();
-        jLabel3 = new javax.swing.JLabel();
+        jpfContrasenia = new javax.swing.JPasswordField();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jchMostrarContra = new javax.swing.JCheckBox();
+        btnAceptar = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -59,42 +63,26 @@ public class VtnContraseña extends javax.swing.JFrame
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton2.setBackground(new java.awt.Color(207, 181, 59));
-        jButton2.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("ACEPTAR");
-        jButton2.addActionListener(new java.awt.event.ActionListener()
+        btnCancelar.setBackground(new java.awt.Color(207, 181, 59));
+        btnCancelar.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
+        btnCancelar.setText("CANCELAR");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jButton2ActionPerformed(evt);
+                btnCancelarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 430, 150, 40));
+        jPanel1.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 430, 150, 40));
 
         jLabel2.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("CONTRASEÑA");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 220, 120, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 190, 120, 20));
 
-        jToggleButton1.setBackground(new java.awt.Color(207, 181, 59));
-        jToggleButton1.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        jToggleButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jToggleButton1.setText("CANCELAR");
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                jToggleButton1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jToggleButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 430, 150, 40));
-
-        contrasenia.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        jPanel1.add(contrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 330, 30));
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Logo.png"))); // NOI18N
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, -1, -1));
+        jpfContrasenia.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jPanel1.add(jpfContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 330, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/boton rojo.png"))); // NOI18N
         jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -122,23 +110,45 @@ public class VtnContraseña extends javax.swing.JFrame
         jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, -1, -1));
 
+        jchMostrarContra.setForeground(new java.awt.Color(255, 255, 255));
+        jchMostrarContra.setText("Mostrar Contraseña");
+        jchMostrarContra.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jchMostrarContraActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jchMostrarContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 150, -1));
+
+        btnAceptar.setBackground(new java.awt.Color(207, 181, 59));
+        btnAceptar.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        btnAceptar.setForeground(new java.awt.Color(255, 255, 255));
+        btnAceptar.setText("ACEPTAR");
+        btnAceptar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnAceptarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 430, 150, 40));
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Logo.png"))); // NOI18N
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, -1, -1));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 500));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jToggleButton1ActionPerformed
-    {//GEN-HEADEREND:event_jToggleButton1ActionPerformed
-      
-    }//GEN-LAST:event_jToggleButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton2ActionPerformed
-    {//GEN-HEADEREND:event_jButton2ActionPerformed
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnCancelarActionPerformed
+    {//GEN-HEADEREND:event_btnCancelarActionPerformed
         // TODO add your handling code here:
-                   
-
-    }//GEN-LAST:event_jButton2ActionPerformed
+        this.dispose();
+        controladorLogin.vtnLogin.setVisible(true);
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jLabel1MouseClicked
     {//GEN-HEADEREND:event_jLabel1MouseClicked
@@ -150,6 +160,33 @@ public class VtnContraseña extends javax.swing.JFrame
         this.setState(JFrame.ICONIFIED);
     }//GEN-LAST:event_jLabel4MouseClicked
 
+    private void jchMostrarContraActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jchMostrarContraActionPerformed
+    {//GEN-HEADEREND:event_jchMostrarContraActionPerformed
+        // TODO add your handling code here:
+        if (jchMostrarContra.isSelected())
+        {
+            jpfContrasenia.setEchoChar((char) 0);
+        } else
+        {
+            jpfContrasenia.setEchoChar('*');
+        }
+    }//GEN-LAST:event_jchMostrarContraActionPerformed
+
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnAceptarActionPerformed
+    {//GEN-HEADEREND:event_btnAceptarActionPerformed
+        // TODO add your handling code here
+        String hasContra = seguridad.Seguridad.generarHash(new String(jpfContrasenia.getPassword()));
+        if (controladorLogin.login.iniciarSesion(hasContra))
+        {
+            System.out.println("inicado");
+        } else
+        {
+            System.out.println("Contraseña Erronea");
+        }
+
+
+    }//GEN-LAST:event_btnAceptarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -160,29 +197,31 @@ public class VtnContraseña extends javax.swing.JFrame
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try
+
+        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
         {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
+            if ("Nimbus".equals(info.getName()))
             {
-                if ("Nimbus".equals(info.getName()))
+                try
                 {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
+                } catch (ClassNotFoundException ex)
+                {
+                    Logger.getLogger(VtnContraseña.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InstantiationException ex)
+                {
+                    Logger.getLogger(VtnContraseña.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IllegalAccessException ex)
+                {
+                    Logger.getLogger(VtnContraseña.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (UnsupportedLookAndFeelException ex)
+                {
+                    Logger.getLogger(VtnContraseña.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                break;
             }
-        } catch (ClassNotFoundException ex)
-        {
-            java.util.logging.Logger.getLogger(VtnContraseña.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex)
-        {
-            java.util.logging.Logger.getLogger(VtnContraseña.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex)
-        {
-            java.util.logging.Logger.getLogger(VtnContraseña.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex)
-        {
-            java.util.logging.Logger.getLogger(VtnContraseña.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -201,16 +240,16 @@ public class VtnContraseña extends javax.swing.JFrame
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPasswordField contrasenia;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnAceptar;
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JCheckBox jchMostrarContra;
+    private javax.swing.JPasswordField jpfContrasenia;
     // End of variables declaration//GEN-END:variables
 }

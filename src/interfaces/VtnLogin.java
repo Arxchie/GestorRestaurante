@@ -4,10 +4,12 @@
  */
 package interfaces;
 
-
+import componenteLogin.IServicioLogin;
+import controlador.controladorLogin;
 import dao.LoginDAO;
 import java.awt.Image;
 import java.awt.Toolkit;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import modelo.*;
 
@@ -21,15 +23,14 @@ public class VtnLogin extends javax.swing.JFrame
     /**
      * Creates new form Login
      */
-    public static modelo.Login login;
-
     public VtnLogin()
     {
+
         initComponents();
         setIconImage(getIconImage());
-        login = LoginDAO.cargarUsuarioPorNombre("Admin");
+        controladorLogin.login = LoginDAO.cargarUsuarioPorNombre("Admin");
     }
-    
+
     public Image getIconImage()
     {
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Imagenes/Logo.png"));
@@ -47,7 +48,7 @@ public class VtnLogin extends javax.swing.JFrame
     {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        btnPersonal = new javax.swing.JButton();
         botonAdmin = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -61,18 +62,18 @@ public class VtnLogin extends javax.swing.JFrame
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setBackground(new java.awt.Color(207, 181, 59));
-        jButton1.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("PERSONAL");
-        jButton1.addActionListener(new java.awt.event.ActionListener()
+        btnPersonal.setBackground(new java.awt.Color(207, 181, 59));
+        btnPersonal.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        btnPersonal.setForeground(new java.awt.Color(255, 255, 255));
+        btnPersonal.setText("PERSONAL");
+        btnPersonal.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jButton1ActionPerformed(evt);
+                btnPersonalActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 230, 210, 40));
+        jPanel1.add(btnPersonal, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 230, 210, 40));
 
         botonAdmin.setBackground(new java.awt.Color(207, 181, 59));
         botonAdmin.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
@@ -122,25 +123,29 @@ public class VtnLogin extends javax.swing.JFrame
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
-    {//GEN-HEADEREND:event_jButton1ActionPerformed
+    private void btnPersonalActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnPersonalActionPerformed
+    {//GEN-HEADEREND:event_btnPersonalActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnPersonalActionPerformed
 
     private void botonAdminActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_botonAdminActionPerformed
     {//GEN-HEADEREND:event_botonAdminActionPerformed
         this.setVisible(false);
-        if (login == null)
-        {
-            VtnRegistra_Contra vtnRegistraContrasenia = new VtnRegistra_Contra();
-            vtnRegistraContrasenia.setVisible(true);
-            vtnRegistraContrasenia.setLocationRelativeTo(null);
-        } else
-        {
-            new VtnContraseña().setVisible(true);
-        }
+        iniciarLogin();
+
     }//GEN-LAST:event_botonAdminActionPerformed
 
+    private void iniciarLogin()
+    {
+        if (controladorLogin.login == null)
+        {
+            controladorLogin.vtnRegistra.setVisible(true);
+        } else
+        {
+            controladorLogin.vtnContra.setVisible(true);
+        }
+
+    }
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jLabel3MouseClicked
     {//GEN-HEADEREND:event_jLabel3MouseClicked
         this.setState(JFrame.ICONIFIED);
@@ -169,20 +174,28 @@ public class VtnLogin extends javax.swing.JFrame
                 {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex)
         {
-            java.util.logging.Logger.getLogger(VtnLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VtnLogin.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex)
         {
-            java.util.logging.Logger.getLogger(VtnLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VtnLogin.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex)
         {
-            java.util.logging.Logger.getLogger(VtnLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VtnLogin.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex)
         {
-            java.util.logging.Logger.getLogger(VtnLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VtnLogin.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -199,7 +212,7 @@ public class VtnLogin extends javax.swing.JFrame
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonAdmin;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnPersonal;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

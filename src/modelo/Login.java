@@ -4,7 +4,7 @@ package modelo;
  *
  * @author HP
  */
-public class Login
+public class Login 
 {
 
     private String contrasenia;
