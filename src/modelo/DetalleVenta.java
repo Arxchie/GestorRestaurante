@@ -1,12 +1,12 @@
 package modelo;
 
-
+import java.io.Serializable;
 
 /**
  * Clase que representa un detalle de venta en una transacción de venta,
  * implementa la interfaz IDetalleVenta.
  */
-public class DetalleVenta 
+public class DetalleVenta implements Serializable
 {
 
     private Producto producto;
@@ -47,7 +47,6 @@ public class DetalleVenta
         calcularSubtotalDetalle(); // Recalcula subtotal al actualizar producto
     }
 
-
     private float calcularSubtotalDetalle()
     {
         if (producto != null)
@@ -57,8 +56,5 @@ public class DetalleVenta
         }
         return 0; // Retorna 0 si producto es null para evitar valores negativos
     }
-
-
- 
 
 }
