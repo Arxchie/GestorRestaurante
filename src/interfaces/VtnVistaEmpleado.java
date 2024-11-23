@@ -62,6 +62,7 @@ public class VtnVistaEmpleado extends javax.swing.JFrame
         jButton1.setText("PERSONAL");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Restaurant Esencia y Sazón");
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -72,7 +73,7 @@ public class VtnVistaEmpleado extends javax.swing.JFrame
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Logo.png"))); // NOI18N
         Backgruond.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        getContentPane().add(Backgruond, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 572));
+        getContentPane().add(Backgruond, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 580));
 
         jMenuBar1.setOpaque(true);
 

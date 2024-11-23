@@ -12,6 +12,10 @@ public class Empleado
     private String telefono;
     private double sueldo;
 
+    public Empleado()
+    {
+    }
+
     public Empleado(long id,String nombre, String direccion, String telefono, double sueldo)
     {
         this.id = id;

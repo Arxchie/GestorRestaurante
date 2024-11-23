@@ -20,5 +20,6 @@ public interface IServicioProductos
     List<Producto> getListaProductos();                 
     Producto buscarProductoPorNombre(String nombre);  
     void actualizarStock(long idProducto,int nuevaCantidad); 
-    boolean productoExiste(long idProducto);        
+    boolean productoExiste(long idProducto); 
+    boolean existeNombreProducto(String nombre);
 }

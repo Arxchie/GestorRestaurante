@@ -95,8 +95,14 @@ public class VtnOpccionesAdmin extends javax.swing.JFrame
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
+        jMenu6 = new javax.swing.JMenu();
+        jMenu4 = new javax.swing.JMenu();
+        jMenu7 = new javax.swing.JMenu();
+        jMenu9 = new javax.swing.JMenu();
+        jMenu5 = new javax.swing.JMenu();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Restaurant Esencia y Sazón");
         setUndecorated(true);
         addWindowListener(new java.awt.event.WindowAdapter()
         {
@@ -125,6 +131,7 @@ public class VtnOpccionesAdmin extends javax.swing.JFrame
         });
         fefesw.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 630, -1));
 
+        tablaProductos.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         tablaProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {
@@ -310,6 +317,59 @@ public class VtnOpccionesAdmin extends javax.swing.JFrame
         jMenu3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenuBar1.add(jMenu3);
 
+        jMenu6.setText("Estadisticas");
+        jMenu6.setActionCommand("Es");
+        jMenu6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jMenu6.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jMenu6.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                jMenu6MouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jMenu6);
+
+        jMenu4.setText("Empleados");
+
+        jMenu7.setText("Dar Alta");
+        jMenu7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jMenu7.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jMenu7.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                jMenu7MouseClicked(evt);
+            }
+        });
+        jMenu4.add(jMenu7);
+
+        jMenu9.setText("Mostrar Empleados");
+        jMenu9.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jMenu9.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jMenu9.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                jMenu9MouseClicked(evt);
+            }
+        });
+        jMenu4.add(jMenu9);
+
+        jMenuBar1.add(jMenu4);
+
+        jMenu5.setText("Salir");
+        jMenu5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jMenu5.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jMenu5.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                jMenu5MouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jMenu5);
+
         setJMenuBar(jMenuBar1);
 
         pack();
@@ -425,11 +485,11 @@ public class VtnOpccionesAdmin extends javax.swing.JFrame
             if (confirmacion == JOptionPane.YES_OPTION)
             {
                 DefaultTableModel modeloTabla = (DefaultTableModel) tablaProductos.getModel();
-                long codigoProducto = (long) modeloTabla.getValueAt(filaSeleccionada, 0); 
+                long codigoProducto = (long) modeloTabla.getValueAt(filaSeleccionada, 0);
 
                 ProductoDAO productoDAO = new ProductoDAO();
                 productoDAO.eliminarProducto(codigoProducto);
-                
+
                 llenarTablaProductos();
                 JOptionPane.showMessageDialog(this, "Producto eliminado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
             }
@@ -451,6 +511,28 @@ public class VtnOpccionesAdmin extends javax.swing.JFrame
     {//GEN-HEADEREND:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+    private void jMenu5MouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jMenu5MouseClicked
+    {//GEN-HEADEREND:event_jMenu5MouseClicked
+        dispose();
+        dispose();
+        new VtnLogin().setVisible(true);
+    }//GEN-LAST:event_jMenu5MouseClicked
+
+    private void jMenu6MouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jMenu6MouseClicked
+    {//GEN-HEADEREND:event_jMenu6MouseClicked
+        new VtnEstadisticas().setVisible(true);
+    }//GEN-LAST:event_jMenu6MouseClicked
+
+    private void jMenu7MouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jMenu7MouseClicked
+    {//GEN-HEADEREND:event_jMenu7MouseClicked
+        new VtnAltaEmpleados().setVisible(true);
+    }//GEN-LAST:event_jMenu7MouseClicked
+
+    private void jMenu9MouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jMenu9MouseClicked
+    {//GEN-HEADEREND:event_jMenu9MouseClicked
+         //new VtnMostrarEmpleados().setVisible(true);
+         new VtnMostrarEmpleados().setVisible(true);
+    }//GEN-LAST:event_jMenu9MouseClicked
 
     public void filtrarProductos()
     {
@@ -578,6 +660,11 @@ public class VtnOpccionesAdmin extends javax.swing.JFrame
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
+    private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
