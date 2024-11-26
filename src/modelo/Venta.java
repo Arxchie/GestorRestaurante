@@ -1,14 +1,15 @@
 package modelo;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Venta
+public class Venta implements Serializable
 {
 
-    private LocalDate fecha;
     private long codigoVenta;
+    private LocalDate fecha;
     private String anotaciones;
     private double subTotal;
     private double total;
@@ -34,7 +35,7 @@ public class Venta
     {
         this.descuento = descuento;
     }
-    
+
     public List<DetalleVenta> getListaDetalles()
     {
         return detallesVenta;
@@ -44,7 +45,6 @@ public class Venta
 //    {
 //        this.detallesVenta = detalles;
 //    }
-
     public LocalDate getFecha()
     {
         return fecha;
@@ -131,6 +131,16 @@ public class Venta
         }
         this.subTotal = sub;
         return sub;
+    }
+
+    public List<DetalleVenta> getDetallesVenta()
+    {
+        return detallesVenta;
+    }
+
+    public void setDetallesVenta(List<DetalleVenta> detallesVenta)
+    {
+        this.detallesVenta = detallesVenta;
     }
 
     public float calcularTotal()

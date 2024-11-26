@@ -4,12 +4,14 @@
  */
 package modelo;
 
+import java.io.Serializable;
+
 
 /**
  *
  * @author HP
  */
-public class Producto 
+public class Producto implements Serializable
 {
     private long codigo;
     private String nombre;
