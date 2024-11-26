@@ -4,9 +4,23 @@
  */
 package interfaces;
 
+import cjb.ci.BtnEntero;
+import cjb.ci.Mensajes;
+import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.Action;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import modelo.DetalleVenta;
+import modelo.Producto;
+import modelo.Venta;
 
 /**
  *
@@ -18,9 +32,14 @@ public class VtnCuentaAbierta extends javax.swing.JFrame
     /**
      * Creates new form CuentaAbierta
      */
+    Venta venta = new Venta();
+
     public VtnCuentaAbierta()
     {
         initComponents();
+        configurarVtnProductos();
+        panelDetalles.setLayout(new BoxLayout(panelDetalles, BoxLayout.Y_AXIS));
+
         setIconImage(getIconImage());
     }
 
@@ -41,13 +60,18 @@ public class VtnCuentaAbierta extends javax.swing.JFrame
     {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        lblIVA = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        btnAgregar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        panelDetalles = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        lblSub = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jtfTotal = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -55,25 +79,16 @@ public class VtnCuentaAbierta extends javax.swing.JFrame
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Restaurant Esencia y Sazón");
+        setUndecorated(true);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Total:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 320, 115, 41));
-
-        jTextField2.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField2.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        jTextField2.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                jTextField2ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 330, 310, 30));
+        lblIVA.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        lblIVA.setForeground(new java.awt.Color(255, 255, 255));
+        lblIVA.setText("IVA");
+        jPanel1.add(lblIVA, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 490, 80, 30));
 
         jButton2.setBackground(new java.awt.Color(207, 181, 59));
         jButton2.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
@@ -86,12 +101,12 @@ public class VtnCuentaAbierta extends javax.swing.JFrame
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 390, 210, 40));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 470, 100, 30));
 
         jButton3.setBackground(new java.awt.Color(207, 181, 59));
         jButton3.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Regresar ");
+        jButton3.setText("Volver");
         jButton3.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -99,28 +114,65 @@ public class VtnCuentaAbierta extends javax.swing.JFrame
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 390, 210, 40));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 470, 90, 30));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
+        btnAgregar.setBackground(new java.awt.Color(207, 181, 59));
+        btnAgregar.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        btnAgregar.setForeground(new java.awt.Color(255, 255, 255));
+        btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String []
-            {
-                "Producto:", "Precio Unitario:"
+                btnAgregarActionPerformed(evt);
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        });
+        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 470, 110, 30));
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 550, 200));
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        jComboBox1.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Productos:", "Ensalada", "Sopa", "Milanesa" }));
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 30, 320, 30));
+        panelDetalles.setBackground(new java.awt.Color(255, 255, 255));
+        panelDetalles.setLayout(new javax.swing.BoxLayout(panelDetalles, javax.swing.BoxLayout.Y_AXIS));
+        jScrollPane1.setViewportView(panelDetalles);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, 740, 370));
+
+        jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 36)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("VENTA");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 30, -1, -1));
+
+        lblSub.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        lblSub.setForeground(new java.awt.Color(255, 255, 255));
+        lblSub.setText("Sub");
+        jPanel1.add(lblSub, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 460, 80, 30));
+
+        jLabel7.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Total:");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 530, 50, 30));
+
+        jtfTotal.setBackground(new java.awt.Color(204, 204, 204));
+        jtfTotal.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        jtfTotal.setEnabled(false);
+        jtfTotal.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jtfTotalActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jtfTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 530, 80, 30));
+
+        jLabel8.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("Subtotal:");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 460, 80, 30));
+
+        jLabel9.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("IVA:");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 490, 50, 30));
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/boton rojo.png"))); // NOI18N
         jMenu1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -154,22 +206,29 @@ public class VtnCuentaAbierta extends javax.swing.JFrame
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 859, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 928, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 568, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+       
+        if ( Mensajes.pregunta(this, "Desea Finalizar la venta?")==0)
+        {
+            System.out.println("Venta Finalizada");
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -185,6 +244,102 @@ public class VtnCuentaAbierta extends javax.swing.JFrame
     {//GEN-HEADEREND:event_jMenu2MouseClicked
         this.setState(JFrame.ICONIFIED);
     }//GEN-LAST:event_jMenu2MouseClicked
+    VtnVerProductos vtnProductos = new VtnVerProductos();
+
+    private void configurarVtnProductos()
+    {
+        programarBoton();
+    }
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnAgregarActionPerformed
+    {//GEN-HEADEREND:event_btnAgregarActionPerformed
+
+        //agregarDetalleAvista("Cocacola", "25");
+        vtnProductos.setVisible(true);
+
+    }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void jtfTotalActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jtfTotalActionPerformed
+    {//GEN-HEADEREND:event_jtfTotalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfTotalActionPerformed
+
+    private void programarBoton()
+    {
+        JButton btnAgregar = vtnProductos.getBtnBotonProgramable();
+        btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                Producto producto = vtnProductos.obtenerProductoSeleccionado();
+                if (producto != null)
+                {
+                    DetalleVenta nvoDetalle = new DetalleVenta(producto, 1);
+                    venta.agregarDetalle(nvoDetalle);
+                    repintarVistaDetalles();
+                    System.out.println(venta.toString());
+
+                } else
+                {
+                    System.out.println("ninguno Seleccionado");
+                }
+
+            }
+        });
+        //  vtnProductos.setBtnBotonProgramable(btnAgregar);
+    }
+
+    public JButton getBtnAgregarDetalle()
+    {
+        return btnAgregar;
+    }
+
+    private void repintarVistaDetalles()
+    {
+        List<DetalleVenta> detalles = venta.getDetallesVenta();
+        lblIVA.setText("");
+        lblSub.setText("");
+        jtfTotal.setText("");
+
+        if (!detalles.isEmpty())
+        {
+            panelDetalles.removeAll();
+            for (DetalleVenta d : detalles)
+            {
+                agregarDetalleAPanel(d);
+            }
+
+            lblIVA.setText(String.format("%.1f", venta.calcularImpuestos()));
+            lblSub.setText(String.format("%.1f", venta.getSubTotal()));
+            jtfTotal.setText(String.format("%.1f", venta.getTotal()));
+            System.out.println("TOTAL: " + String.format("%.1f", venta.getTotal()));
+
+        }
+    }
+
+    private void agregarDetalleAPanel(DetalleVenta detalle)
+    {
+        PanelDetalle panelNvoDetalle = new PanelDetalle(detalle.getProducto().getNombre(), detalle.getProducto().getPrecioVenta() + "");
+        panelNvoDetalle.getJtfSubtotal().setText(detalle.getSubTotal() + "");
+        panelNvoDetalle.getJtfCantidad().setText(detalle.getCantidadProducto() + "");
+        panelNvoDetalle.getBtnEliminar().addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                venta.eliminarDetalle(detalle);
+                repintarVistaDetalles();
+
+            }
+        });
+        panelDetalles.add(panelNvoDetalle);
+        panelDetalles.add(Box.createRigidArea(new Dimension(0, 10))); // Espacio de 10px entre paneles
+        panelDetalles.revalidate();
+        panelDetalles.repaint();
+
+    }
 
     /**
      * @param args the command line arguments
@@ -233,17 +388,22 @@ public class VtnCuentaAbierta extends javax.swing.JFrame
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAgregar;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jtfTotal;
+    private javax.swing.JLabel lblIVA;
+    private javax.swing.JLabel lblSub;
+    private javax.swing.JPanel panelDetalles;
     // End of variables declaration//GEN-END:variables
 }

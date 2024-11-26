@@ -20,6 +20,33 @@ public class DetalleVenta implements Serializable
         this.subTotal = (producto != null) ? cantidad * producto.getPrecioVenta() : 0;
     }
 
+    public boolean reducirCantidad(int cantidad)
+    {
+        if (cantidad <= 0)
+        {
+            // No se permite reducir con un valor no válido
+            return false;
+        }
+
+        if (this.cantidad> cantidad)
+        {
+            // Reducir la cantidad del producto
+            this.cantidad -= cantidad;
+            calcularSubtotalDetalle();
+            return true;
+        } else if (this.cantidad == cantidad)
+        {
+            // Si la cantidad es igual a la actual, reducir a 0 (o podrías manejarlo de otra forma)
+            this.cantidad = 0;
+            calcularSubtotalDetalle();
+            return true;
+        } else
+        {
+            // No se puede reducir más de la cantidad existente
+            return false;
+        }
+    }
+
     public int getCantidadProducto()
     {
         return cantidad;

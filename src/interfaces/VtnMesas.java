@@ -122,7 +122,7 @@ public class VtnMesas extends javax.swing.JFrame
         } catch (IOException | ClassNotFoundException e)
         {
             JOptionPane.showMessageDialog(null, "No se pudieron cargar las mesas");
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 
