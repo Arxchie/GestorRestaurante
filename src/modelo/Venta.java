@@ -12,8 +12,8 @@ public class Venta implements Serializable
     private long codigoVenta;
     private LocalDate fecha;
     private String anotaciones;
-    private double subTotal;
-    private double total;
+    private float subTotal;
+    private float total;
     private List<DetalleVenta> detallesVenta;
     private double descuento;
 
@@ -71,12 +71,12 @@ public class Venta implements Serializable
         this.anotaciones = anotaciones;
     }
 
-    public double getSubTotal()
+    public float getSubTotal()
     {
         return subTotal;
     }
 
-    public double getTotal()
+    public float getTotal()
     {
         return total;
     }
@@ -184,7 +184,7 @@ public class Venta implements Serializable
         return false;
     }
 
-    public boolean validarVenta()
+    public boolean isValida()
     {
         return !detallesVenta.isEmpty();
     }
