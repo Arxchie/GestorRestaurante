@@ -218,16 +218,10 @@ public class VtnVerProductos extends javax.swing.JFrame
     {
         this.btnBotonProgramable = btnBotonProgramable;
     }
-
+ 
     private void btnBotonProgramableActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnBotonProgramableActionPerformed
     {//GEN-HEADEREND:event_btnBotonProgramableActionPerformed
-        // TODO add your handling code here:
-//        Producto producto = obtenerProductoSeleccionado();
-//        if (producto != null)
-//        {
-//            System.out.println(producto.getNombre());
-//            
-//        }
+   
     }//GEN-LAST:event_btnBotonProgramableActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed

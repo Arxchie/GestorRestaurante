@@ -33,7 +33,7 @@ public class Validaciones
         if ((ke.getKeyChar() < '0' || ke.getKeyChar() > '9')
                 && ke.getKeyCode() != 8)
         {
-            ke.setKeyChar((char) 8);
+            ke.consume();
         }
     }
 
@@ -667,8 +667,7 @@ public class Validaciones
         {
             System.out.println("xxxxxxxxx");
             jt.setText("");
-            evt.setKeyChar((char) 8);
-            evt.setKeyCode(0);
+            evt.consume();
             Mensajes.error(jf, "comando desactivado");
         } else if (evt.isControlDown() && evt.getKeyCode() == KeyEvent.VK_X)
         {

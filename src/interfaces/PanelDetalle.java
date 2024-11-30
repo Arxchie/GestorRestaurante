@@ -4,6 +4,7 @@
  */
 package interfaces;
 
+import cjb.ci.Validaciones;
 import java.awt.Component;
 import java.awt.Container;
 import javax.swing.Box;
@@ -51,18 +52,23 @@ public class PanelDetalle extends javax.swing.JPanel
         setMaximumSize(new java.awt.Dimension(800, 110));
         setMinimumSize(new java.awt.Dimension(800, 110));
         setPreferredSize(new java.awt.Dimension(500, 110));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblNombreProducto.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
         lblNombreProducto.setText("NombreProducto");
+        add(lblNombreProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 461, -1));
 
         jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel2.setText("Cantidad");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel3.setText("Precio Unitario");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel4.setText("Subtotal");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 40, 61, -1));
 
         jtfCantidad.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jtfCantidad.setText("1");
@@ -75,6 +81,18 @@ public class PanelDetalle extends javax.swing.JPanel
                 jtfCantidadActionPerformed(evt);
             }
         });
+        jtfCantidad.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
+                jtfCantidadKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt)
+            {
+                jtfCantidadKeyTyped(evt);
+            }
+        });
+        add(jtfCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 67, -1));
 
         jtfPrecioU.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jtfPrecioU.setFocusable(false);
@@ -86,12 +104,14 @@ public class PanelDetalle extends javax.swing.JPanel
                 jtfPrecioUActionPerformed(evt);
             }
         });
+        add(jtfPrecioU, new org.netbeans.lib.awtextra.AbsoluteConstraints(217, 70, 67, -1));
 
         jtfSubtotal.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jtfSubtotal.setFocusable(false);
         jtfSubtotal.setPreferredSize(new java.awt.Dimension(70, 25));
+        add(jtfSubtotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(414, 70, 67, -1));
 
-        btnEliminar.setText("jButton1");
+        btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/bote-de-basura.png"))); // NOI18N
         btnEliminar.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -99,51 +119,7 @@ public class PanelDetalle extends javax.swing.JPanel
                 btnEliminarActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jtfCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addGap(130, 130, 130)
-                        .addComponent(jtfPrecioU, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addGap(130, 130, 130)
-                        .addComponent(jtfSubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(lblNombreProducto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel2)
-                            .addGap(132, 132, 132)
-                            .addComponent(jLabel3)
-                            .addGap(102, 102, 102)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(111, 111, 111)
-                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(169, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(lblNombreProducto)
-                .addGap(9, 9, 9)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
-                        .addGap(11, 11, 11)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtfCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtfPrecioU, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtfSubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
-        );
+        add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 40, 39, 39));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jtfPrecioUActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jtfPrecioUActionPerformed
@@ -198,6 +174,20 @@ public class PanelDetalle extends javax.swing.JPanel
         }
 
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void jtfCantidadKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jtfCantidadKeyPressed
+    {//GEN-HEADEREND:event_jtfCantidadKeyPressed
+        // TODO add your handling code here:
+           Validaciones.validaCopyPaste(evt, null,jtfCantidad );
+
+    }//GEN-LAST:event_jtfCantidadKeyPressed
+
+    private void jtfCantidadKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jtfCantidadKeyTyped
+    {//GEN-HEADEREND:event_jtfCantidadKeyTyped
+        // TODO add your handling code here:
+                Validaciones.validaEntero(evt);
+             
+    }//GEN-LAST:event_jtfCantidadKeyTyped
 
     public JTextField getJtfSubtotal()
     {

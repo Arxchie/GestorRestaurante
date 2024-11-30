@@ -162,7 +162,7 @@ public class VtnOpccionesAdmin extends javax.swing.JFrame
         });
         jScrollPane1.setViewportView(tablaProductos);
 
-        fefesw.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 800, 360));
+        fefesw.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 800, 360));
 
         jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));

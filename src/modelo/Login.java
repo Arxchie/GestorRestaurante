@@ -30,16 +30,6 @@ public class Login
         return false;  // Ya existe una contraseña registrada
     }
 
-    public boolean cambiarContrasenia(String contraseniaAntigua, String contraseniaNueva)
-    {
-        // Verifica si la contraseña antigua es correcta antes de cambiarla
-        if (this.getContrasenia() != null && this.getContrasenia().equals(contraseniaAntigua) && sesionIniciada)
-        {
-            this.contrasenia = contraseniaNueva;
-            return true;  // Cambio de contraseña exitoso
-        }
-        return false;  // Contraseña antigua incorrecta o no registrada
-    }
 
     private boolean validarContrasenia(String contrasenia)
     {
@@ -65,6 +55,16 @@ public class Login
         {
             sesionIniciada = false;
         }
+    }
+    public boolean cambiarContrasenia(String contraseniaAntigua, String contraseniaNueva)
+    {
+        // Verifica si la contraseña antigua es correcta antes de cambiarla
+        if (this.getContrasenia() != null && this.getContrasenia().equals(contraseniaAntigua) && sesionIniciada)
+        {
+            this.contrasenia = contraseniaNueva;
+            return true;  // Cambio de contraseña exitoso
+        }
+        return false;  // Contraseña antigua incorrecta o no registrada
     }
 
     /**

@@ -8,12 +8,16 @@ import java.util.List;
 
 public class Venta implements Serializable
 {
-    private long codigoVenta;
     private Date fecha;
+    private long codigoVenta;
     private String anotaciones;
     private float subTotal;
     private float total;
     private List<DetalleVenta> detallesVenta;
+    
+    
+    
+    
     private double descuento;
 
     public Venta(long codigoVenta, Date fecha, String anotaciones, float subTotal, float total, /*List<DetalleVenta> detallesVenta,*/ double descuento)
@@ -166,7 +170,7 @@ public class Venta implements Serializable
         }
         return null;
     }
-    public boolean reducirCantidadPorProducto(Producto producto, int cantidad)
+    public boolean cantida(Producto producto, int cantidad)
     {
         if (producto == null || cantidad <= 0)
         {

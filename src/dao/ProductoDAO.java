@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class ProductoDAO implements IServicioProductos
 {
-    public List<Producto> obtenerTodosLosProductos()
+    public List<Producto>obtenerTodosLosProductos()
     {
         List<Producto> productos = new ArrayList<>();
         String sql = "SELECT CodigoProductos, Nombre, Categoria, Costo, Precio, Descripcion, CantidadInventario, UnidadDeMedida FROM Productos";

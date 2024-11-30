@@ -20,7 +20,7 @@ import modelo.Producto;
 public class VentaDAO
 {
 
-    public boolean guardarVentaEnBaseDeDatos(Venta venta)
+    public boolean guardarVenta(Venta venta)
     {
         if (venta != null)
         {
@@ -55,7 +55,7 @@ public class VentaDAO
 
         Venta venta = new Venta(0, fecha, "2312", 400, 2000, 1000);
 
-        dao.guardarVentaEnBaseDeDatos(venta);
+        dao.guardarVenta(venta);
 
     }
 
