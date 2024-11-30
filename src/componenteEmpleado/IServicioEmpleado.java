@@ -21,5 +21,9 @@ public interface IServicioEmpleado
     boolean existeNombre(String nombre);
     
     boolean existeNumero(String numero);
+    
+    List<String> obtenerNombresEmpleados();
+    
+    long obtenerIdEmpleadoPorNombre(String nombreEmpleado);
 }
     

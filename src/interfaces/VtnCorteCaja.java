@@ -5,43 +5,60 @@
 package interfaces;
 
 import cjb.ci.Mensaje;
+import dao.CorteDAO;
+import dao.DetalleCorteDAO;
+import dao.EmpleadoDAO;
+import dao.VentaDAO;
 import java.awt.BorderLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import modelo.CorteDeCaja;
+import modelo.Empleado;
+import modelo.Venta;
 
 /**
  *
  * @author User
  */
-public class VtnCorteCaja extends javax.swing.JFrame {
+public class VtnCorteCaja extends javax.swing.JFrame
+{
 
     /**
      * Creates new form CorteCaja
      */
-    public VtnCorteCaja() {
+    private com.toedter.calendar.JDateChooser fechaCorte;
+
+    public VtnCorteCaja()
+    {
         initComponents();
-        jtfFecha.setText("22/02/2024");
-        jtfTotalVentas.setText("1523.5");
-       jtfEmpleado.setText("Emmanuel Martinez");
-       jtfDiferencia.setText("0.0");
+        cargarEmpleadosEnComboBox();
+        fechaCorte = new com.toedter.calendar.JDateChooser();
+
+        fechaCorte.setBounds(0, 0, 150, 30);
+
+        calendario.setLayout(null);
+
+        calendario.add(fechaCorte);
+
         agregarPanel();
         setIconImage(getIconImage());
+        configurarCalculoDiferencia();
     }
-   
-    private void agregarPanel() {
-        // Crea una instancia del panel
 
-        // Establece un layout para el JPanel donde se agregará el mapa
+    private void agregarPanel()
+    {
         jPanel1.setLayout(new BorderLayout());
-
-        // Agrega el panel a vista empleado
-
-        // Refresca el panel para que se vea el mapa
         jPanel1.revalidate();
         jPanel1.repaint();
     }
-    
+
     public Image getIconImage()
     {
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("imagenes/Logo.png"));
@@ -61,17 +78,16 @@ public class VtnCorteCaja extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jtfEmpleado = new javax.swing.JTextField();
-        jtfTotalVentas = new javax.swing.JTextField();
-        jtfFecha = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jtfDiferencia = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        empleados = new javax.swing.JComboBox<>();
+        calendario = new javax.swing.JPanel();
         jtfDineroEnCaja = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jtfTotalVentas = new javax.swing.JTextField();
+        jtfDiferencia = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -80,6 +96,13 @@ public class VtnCorteCaja extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Restaurant Esencia y Sazón");
         setUndecorated(true);
+        addWindowListener(new java.awt.event.WindowAdapter()
+        {
+            public void windowOpened(java.awt.event.WindowEvent evt)
+            {
+                formWindowOpened(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
@@ -95,42 +118,6 @@ public class VtnCorteCaja extends javax.swing.JFrame {
         jLabel4.setText("Dinero En Caja :");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 210, 150, 41));
 
-        jtfEmpleado.setBackground(new java.awt.Color(204, 204, 204));
-        jtfEmpleado.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
-        jtfEmpleado.setFocusable(false);
-        jtfEmpleado.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                jtfEmpleadoActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jtfEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 280, 310, 30));
-
-        jtfTotalVentas.setBackground(new java.awt.Color(204, 204, 204));
-        jtfTotalVentas.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
-        jtfTotalVentas.setFocusable(false);
-        jtfTotalVentas.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                jtfTotalVentasActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jtfTotalVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 160, 310, 30));
-
-        jtfFecha.setBackground(new java.awt.Color(204, 204, 204));
-        jtfFecha.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
-        jtfFecha.setFocusable(false);
-        jtfFecha.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                jtfFechaActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jtfFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 110, 120, 30));
-
         jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Diferencia:");
@@ -140,18 +127,6 @@ public class VtnCorteCaja extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Fecha del Corte:");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, 160, 41));
-
-        jtfDiferencia.setBackground(new java.awt.Color(204, 204, 204));
-        jtfDiferencia.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
-        jtfDiferencia.setFocusable(false);
-        jtfDiferencia.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                jtfDiferenciaActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jtfDiferencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 340, 310, 30));
 
         jLabel7.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -169,36 +144,33 @@ public class VtnCorteCaja extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 410, 210, 40));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 410, 210, 40));
 
         jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("CORTE DE CAJA");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 20, -1, -1));
 
-        jtfDineroEnCaja.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel1.add(empleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 280, 310, 30));
+        jPanel1.add(calendario, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 110, 150, 30));
+
         jtfDineroEnCaja.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
-        jtfDineroEnCaja.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                jtfDineroEnCajaActionPerformed(evt);
-            }
-        });
         jPanel1.add(jtfDineroEnCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 220, 310, 30));
 
-        jButton1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jButton1.setText("seleccionar");
-        jButton1.addActionListener(new java.awt.event.ActionListener()
+        jtfTotalVentas.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        jtfTotalVentas.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jButton1ActionPerformed(evt);
+                jtfTotalVentasActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 280, -1, 30));
+        jPanel1.add(jtfTotalVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 160, 310, 30));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 500));
+        jtfDiferencia.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        jPanel1.add(jtfDiferencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 340, 310, 30));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 510));
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/boton rojo.png"))); // NOI18N
         jMenu1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -232,22 +204,6 @@ public class VtnCorteCaja extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jtfEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfEmpleadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfEmpleadoActionPerformed
-
-    private void jtfTotalVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfTotalVentasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfTotalVentasActionPerformed
-
-    private void jtfFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfFechaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfFechaActionPerformed
-
-    private void jtfDiferenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfDiferenciaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfDiferenciaActionPerformed
-
     private void jMenu1MouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jMenu1MouseClicked
     {//GEN-HEADEREND:event_jMenu1MouseClicked
         dispose();
@@ -258,61 +214,212 @@ public class VtnCorteCaja extends javax.swing.JFrame {
         this.setState(JFrame.ICONIFIED);
     }//GEN-LAST:event_jMenu2MouseClicked
 
-    private void jtfDineroEnCajaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jtfDineroEnCajaActionPerformed
-    {//GEN-HEADEREND:event_jtfDineroEnCajaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfDineroEnCajaActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
-    {//GEN-HEADEREND:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        new VtnMostrarEmpleadosSimplificada().setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton2ActionPerformed
     {//GEN-HEADEREND:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        Mensaje.exito(this, "Corte Guardado");
+        try
+        {
+
+            if (fechaCorte.getDate() == null)
+            {
+                JOptionPane.showMessageDialog(this, "Por favor, seleccione una fecha para el corte de caja.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            java.sql.Date fechaSeleccionada = new java.sql.Date(fechaCorte.getDate().getTime());
+
+            if (jtfTotalVentas.getText().isEmpty() || jtfDineroEnCaja.getText().isEmpty())
+            {
+                JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            double totalVentas;
+            double dineroCaja;
+
+            try
+            {
+                totalVentas = Double.parseDouble(jtfTotalVentas.getText());
+                dineroCaja = Double.parseDouble(jtfDineroEnCaja.getText());
+            } catch (NumberFormatException e)
+            {
+                JOptionPane.showMessageDialog(this, "Por favor, ingrese valores numéricos válidos.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            String nombreEmpleado = (String) empleados.getSelectedItem();
+            if (nombreEmpleado == null || nombreEmpleado.isEmpty())
+            {
+                JOptionPane.showMessageDialog(this, "Por favor, seleccione un empleado.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            EmpleadoDAO empleadoDAO = new EmpleadoDAO();
+            long idEmpleado = empleadoDAO.obtenerIdEmpleadoPorNombre(nombreEmpleado);
+
+            VentaDAO ventaDAO = new VentaDAO();
+            List<Long> ventasSinCorte = ventaDAO.obtenerVentasSinCorte();
+
+            if (ventasSinCorte.isEmpty())
+            {
+                JOptionPane.showMessageDialog(this, "No hay ventas sin corte de caja.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            CorteDeCaja nuevoCorte = new CorteDeCaja(idEmpleado, fechaSeleccionada, totalVentas, dineroCaja, ventasSinCorte);
+
+            CorteDAO corteDAO = new CorteDAO();
+            long idCorteDeCaja = corteDAO.agregarCorteDeCaja(nuevoCorte);
+
+            if (idCorteDeCaja != -1)
+            {
+
+                DetalleCorteDAO detalleCorteDAO = new DetalleCorteDAO();
+                boolean detallesExito = detalleCorteDAO.agregarDetalleCorte(idCorteDeCaja, ventasSinCorte);
+
+                if (detallesExito)
+                {
+                    JOptionPane.showMessageDialog(this, "Corte de caja registrado con éxito, incluyendo los detalles.");
+                } else
+                {
+                    JOptionPane.showMessageDialog(this, "Error al registrar los detalles del corte.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } else
+            {
+                JOptionPane.showMessageDialog(this, "Error al registrar el corte de caja.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Ocurrió un error inesperado: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jtfTotalVentasActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jtfTotalVentasActionPerformed
+    {//GEN-HEADEREND:event_jtfTotalVentasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfTotalVentasActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt)//GEN-FIRST:event_formWindowOpened
+    {//GEN-HEADEREND:event_formWindowOpened
+        VentaDAO ventasDAO = new VentaDAO();
+        double totalVentas = ventasDAO.obtenerTotalVentas();
+
+        jtfTotalVentas.setText(String.format("%.2f", totalVentas));
+
+        calcularDiferencia();
+    }//GEN-LAST:event_formWindowOpened
+
+    private void calcularDiferencia()
+    {
+        try
+        {
+            String totalVentasTexto = jtfTotalVentas.getText().trim();
+            String dineroCajaTexto = jtfDineroEnCaja.getText().trim();
+
+            if (totalVentasTexto.isEmpty() || dineroCajaTexto.isEmpty())
+            {
+                jtfDiferencia.setText("");
+                return;
+            }
+
+            double totalVentas = Double.parseDouble(totalVentasTexto);
+            double dineroCaja = Double.parseDouble(dineroCajaTexto);
+
+            double diferencia = totalVentas - dineroCaja;
+
+            jtfDiferencia.setText(String.format("%.2f", diferencia));
+        } catch (NumberFormatException e)
+        {
+            jtfDiferencia.setText("Error");
+        }
+    }
+
+    private void configurarCalculoDiferencia()
+    {
+        jtfDineroEnCaja.getDocument().addDocumentListener(new DocumentListener()
+        {
+            @Override
+            public void insertUpdate(DocumentEvent e)
+            {
+                calcularDiferencia();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e)
+            {
+                calcularDiferencia();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e)
+            {
+                calcularDiferencia();
+            }
+        });
+    }
+
+    private void cargarEmpleadosEnComboBox()
+    {
+        EmpleadoDAO empleadoDAO = new EmpleadoDAO();
+        List<String> nombresEmpleados = empleadoDAO.obtenerNombresEmpleados();
+
+        empleados.removeAllItems();
+
+        for (String nombre : nombresEmpleados)
+        {
+            empleados.addItem(nombre);
+        }
+    }
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[])
+    {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+        try
+        {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
+            {
+                if ("Nimbus".equals(info.getName()))
+                {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
+        } catch (ClassNotFoundException ex)
+        {
             java.util.logging.Logger.getLogger(VtnCorteCaja.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
+        } catch (InstantiationException ex)
+        {
             java.util.logging.Logger.getLogger(VtnCorteCaja.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
+        } catch (IllegalAccessException ex)
+        {
             java.util.logging.Logger.getLogger(VtnCorteCaja.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (javax.swing.UnsupportedLookAndFeelException ex)
+        {
             java.util.logging.Logger.getLogger(VtnCorteCaja.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
+        java.awt.EventQueue.invokeLater(new Runnable()
+        {
+            public void run()
+            {
                 new VtnCorteCaja().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JPanel calendario;
+    private javax.swing.JComboBox<String> empleados;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -327,8 +434,6 @@ public class VtnCorteCaja extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jtfDiferencia;
     private javax.swing.JTextField jtfDineroEnCaja;
-    private javax.swing.JTextField jtfEmpleado;
-    private javax.swing.JTextField jtfFecha;
     private javax.swing.JTextField jtfTotalVentas;
     // End of variables declaration//GEN-END:variables
 }
