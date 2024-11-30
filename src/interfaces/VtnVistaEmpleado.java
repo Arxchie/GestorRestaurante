@@ -44,17 +44,16 @@ public class VtnVistaEmpleado extends javax.swing.JFrame
         jButton1 = new javax.swing.JButton();
         Backgruond = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
         jMenu1 = new javax.swing.JMenu();
+        jmVentaMesas = new javax.swing.JMenuItem();
         venta = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         corte = new javax.swing.JMenuItem();
-        jSeparator2 = new javax.swing.JPopupMenu.Separator();
-        balanceo = new javax.swing.JMenuItem();
-        jSeparator3 = new javax.swing.JPopupMenu.Separator();
 
         jButton1.setBackground(new java.awt.Color(207, 181, 59));
         jButton1.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
@@ -72,6 +71,11 @@ public class VtnVistaEmpleado extends javax.swing.JFrame
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Logo.png"))); // NOI18N
         Backgruond.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 36)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("VISTA EMPLEADO");
+        Backgruond.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, 320, 50));
 
         getContentPane().add(Backgruond, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 580));
 
@@ -108,9 +112,20 @@ public class VtnVistaEmpleado extends javax.swing.JFrame
         jMenu1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenu1.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
 
+        jmVentaMesas.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jmVentaMesas.setText("Venta Por Mesas");
+        jmVentaMesas.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jmVentaMesasActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jmVentaMesas);
+
         venta.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         venta.setBackground(new java.awt.Color(171, 145, 68));
-        venta.setText("Iniciar venta");
+        venta.setText("Venta Mostrador");
         venta.setToolTipText("");
         venta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         venta.addActionListener(new java.awt.event.ActionListener()
@@ -127,20 +142,6 @@ public class VtnVistaEmpleado extends javax.swing.JFrame
         corte.setText("Corte de caja");
         corte.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenu1.add(corte);
-        jMenu1.add(jSeparator2);
-
-        balanceo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.SHIFT_DOWN_MASK));
-        balanceo.setText("Balanceo");
-        balanceo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        balanceo.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                balanceoActionPerformed(evt);
-            }
-        });
-        jMenu1.add(balanceo);
-        jMenu1.add(jSeparator3);
 
         jMenuBar1.add(jMenu1);
 
@@ -152,13 +153,10 @@ public class VtnVistaEmpleado extends javax.swing.JFrame
 
     private void ventaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ventaActionPerformed
         // TODO add your handling code here:
+        new VtnMesas().setVisible(true);
 
 
     }//GEN-LAST:event_ventaActionPerformed
-
-    private void balanceoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_balanceoActionPerformed
-
-    }//GEN-LAST:event_balanceoActionPerformed
 
     private void jMenu2MouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jMenu2MouseClicked
     {//GEN-HEADEREND:event_jMenu2MouseClicked
@@ -169,6 +167,13 @@ public class VtnVistaEmpleado extends javax.swing.JFrame
     {//GEN-HEADEREND:event_jMenu3MouseClicked
         this.setState(JFrame.ICONIFIED);
     }//GEN-LAST:event_jMenu3MouseClicked
+
+    private void jmVentaMesasActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jmVentaMesasActionPerformed
+    {//GEN-HEADEREND:event_jmVentaMesasActionPerformed
+        // TODO add your handling code here:
+        new VtnCuentaAbierta().setVisible(true);
+        
+    }//GEN-LAST:event_jmVentaMesasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -218,18 +223,17 @@ public class VtnVistaEmpleado extends javax.swing.JFrame
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Backgruond;
-    private javax.swing.JMenuItem balanceo;
     private javax.swing.JMenuItem corte;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
-    private javax.swing.JPopupMenu.Separator jSeparator2;
-    private javax.swing.JPopupMenu.Separator jSeparator3;
+    private javax.swing.JMenuItem jmVentaMesas;
     private javax.swing.JMenuItem venta;
     // End of variables declaration//GEN-END:variables
 }

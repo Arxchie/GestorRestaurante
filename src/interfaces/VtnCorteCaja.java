@@ -4,6 +4,7 @@
  */
 package interfaces;
 
+import cjb.ci.Mensaje;
 import java.awt.BorderLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -20,6 +21,10 @@ public class VtnCorteCaja extends javax.swing.JFrame {
      */
     public VtnCorteCaja() {
         initComponents();
+        jtfFecha.setText("22/02/2024");
+        jtfTotalVentas.setText("1523.5");
+       jtfEmpleado.setText("Emmanuel Martinez");
+       jtfDiferencia.setText("0.0");
         agregarPanel();
         setIconImage(getIconImage());
     }
@@ -54,19 +59,19 @@ public class VtnCorteCaja extends javax.swing.JFrame {
     {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
+        jtfEmpleado = new javax.swing.JTextField();
+        jtfTotalVentas = new javax.swing.JTextField();
+        jtfFecha = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        jtfDiferencia = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        jtfDineroEnCaja = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -80,111 +85,120 @@ public class VtnCorteCaja extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Cambio:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 115, 41));
-
         jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Ingresos: ");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 115, 41));
+        jLabel3.setText("Total De Ventas: ");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 230, 41));
 
         jLabel4.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Egresos :");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 115, 41));
+        jLabel4.setText("Dinero En Caja :");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 210, 150, 41));
 
-        jTextField2.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField2.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        jTextField2.addActionListener(new java.awt.event.ActionListener()
+        jtfEmpleado.setBackground(new java.awt.Color(204, 204, 204));
+        jtfEmpleado.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        jtfEmpleado.setFocusable(false);
+        jtfEmpleado.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jTextField2ActionPerformed(evt);
+                jtfEmpleadoActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, 310, 30));
+        jPanel1.add(jtfEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 280, 310, 30));
 
-        jTextField3.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField3.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        jTextField3.addActionListener(new java.awt.event.ActionListener()
+        jtfTotalVentas.setBackground(new java.awt.Color(204, 204, 204));
+        jtfTotalVentas.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        jtfTotalVentas.setFocusable(false);
+        jtfTotalVentas.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jTextField3ActionPerformed(evt);
+                jtfTotalVentasActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, 310, 30));
+        jPanel1.add(jtfTotalVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 160, 310, 30));
 
-        jTextField4.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField4.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        jTextField4.addActionListener(new java.awt.event.ActionListener()
+        jtfFecha.setBackground(new java.awt.Color(204, 204, 204));
+        jtfFecha.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        jtfFecha.setFocusable(false);
+        jtfFecha.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jTextField4ActionPerformed(evt);
+                jtfFechaActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 310, 30));
-
-        jTextField5.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField5.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        jTextField5.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                jTextField5ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 70, 120, 30));
+        jPanel1.add(jtfFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 110, 120, 30));
 
         jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Balanceo:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 115, 41));
+        jLabel5.setText("Diferencia:");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 330, 110, 41));
 
         jLabel6.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Fecha:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 60, 115, 41));
+        jLabel6.setText("Fecha del Corte:");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, 160, 41));
 
-        jTextField6.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField6.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        jTextField6.addActionListener(new java.awt.event.ActionListener()
+        jtfDiferencia.setBackground(new java.awt.Color(204, 204, 204));
+        jtfDiferencia.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        jtfDiferencia.setFocusable(false);
+        jtfDiferencia.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jTextField6ActionPerformed(evt);
+                jtfDiferenciaActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 230, 310, 30));
+        jPanel1.add(jtfDiferencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 340, 310, 30));
 
         jLabel7.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Empleado:");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 130, 115, 41));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, 115, 41));
 
         jButton2.setBackground(new java.awt.Color(207, 181, 59));
         jButton2.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("REALIZAR CORTE");
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 230, 210, 40));
-
-        jComboBox1.setBackground(new java.awt.Color(204, 204, 204));
-        jComboBox1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ivan", "Emmanuel", "Jose", "Angel" }));
-        jComboBox1.setToolTipText("");
-        jComboBox1.addActionListener(new java.awt.event.ActionListener()
+        jButton2.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jComboBox1ActionPerformed(evt);
+                jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 140, 185, -1));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 410, 210, 40));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 360));
+        jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 36)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("CORTE DE CAJA");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 20, -1, -1));
+
+        jtfDineroEnCaja.setBackground(new java.awt.Color(204, 204, 204));
+        jtfDineroEnCaja.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        jtfDineroEnCaja.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jtfDineroEnCajaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jtfDineroEnCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 220, 310, 30));
+
+        jButton1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jButton1.setText("seleccionar");
+        jButton1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 280, -1, 30));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 500));
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/boton rojo.png"))); // NOI18N
         jMenu1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -218,29 +232,21 @@ public class VtnCorteCaja extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void jtfEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfEmpleadoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_jtfEmpleadoActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void jtfTotalVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfTotalVentasActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_jtfTotalVentasActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void jtfFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfFechaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_jtfFechaActionPerformed
 
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+    private void jtfDiferenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfDiferenciaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
-
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField6ActionPerformed
-
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_jtfDiferenciaActionPerformed
 
     private void jMenu1MouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jMenu1MouseClicked
     {//GEN-HEADEREND:event_jMenu1MouseClicked
@@ -251,6 +257,23 @@ public class VtnCorteCaja extends javax.swing.JFrame {
     {//GEN-HEADEREND:event_jMenu2MouseClicked
         this.setState(JFrame.ICONIFIED);
     }//GEN-LAST:event_jMenu2MouseClicked
+
+    private void jtfDineroEnCajaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jtfDineroEnCajaActionPerformed
+    {//GEN-HEADEREND:event_jtfDineroEnCajaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfDineroEnCajaActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
+    {//GEN-HEADEREND:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        new VtnMostrarEmpleadosSimplificada().setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton2ActionPerformed
+    {//GEN-HEADEREND:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        Mensaje.exito(this, "Corte Guardado");
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -289,8 +312,8 @@ public class VtnCorteCaja extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -302,10 +325,10 @@ public class VtnCorteCaja extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField jtfDiferencia;
+    private javax.swing.JTextField jtfDineroEnCaja;
+    private javax.swing.JTextField jtfEmpleado;
+    private javax.swing.JTextField jtfFecha;
+    private javax.swing.JTextField jtfTotalVentas;
     // End of variables declaration//GEN-END:variables
 }

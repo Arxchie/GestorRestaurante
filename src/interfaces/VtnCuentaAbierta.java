@@ -6,19 +6,21 @@ package interfaces;
 
 import cjb.ci.BtnEntero;
 import cjb.ci.Mensajes;
+import cjb.ci.Validaciones;
 import dao.ProductoDAO;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.List;
-import javax.swing.Action;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import modelo.DetalleVenta;
 import modelo.Producto;
 import modelo.Venta;
@@ -37,6 +39,7 @@ public class VtnCuentaAbierta extends javax.swing.JFrame
 
     public VtnCuentaAbierta()
     {
+
         initComponents();
         configurarVtnProductos();
         panelDetalles.setLayout(new BoxLayout(panelDetalles, BoxLayout.Y_AXIS));
@@ -254,7 +257,7 @@ public class VtnCuentaAbierta extends javax.swing.JFrame
 
     private void programarJtfCantidad()
     {
-      //  panelNvoDetalle.getJtfCantidad().addKeyListener();
+
     }
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnAgregarActionPerformed
@@ -288,7 +291,6 @@ public class VtnCuentaAbierta extends javax.swing.JFrame
 
     private void agregarProductoAventa(int cantidad)
     {
-
         Producto producto = vtnProductos.obtenerProductoSeleccionado();
         if (producto != null)
         {
@@ -301,6 +303,7 @@ public class VtnCuentaAbierta extends javax.swing.JFrame
                 {
                     DetalleVenta nvoDetalle = new DetalleVenta(producto, cantidad);
                     venta.agregarDetalle(nvoDetalle);
+
                     repintarVistaDetalles();
                 }
             } else
@@ -353,6 +356,7 @@ public class VtnCuentaAbierta extends javax.swing.JFrame
     private void agregarDetalleAPanel(DetalleVenta detalle)
     {
         panelNvoDetalle = new PanelDetalle(detalle.getProducto().getNombre(), detalle.getProducto().getPrecioVenta() + "");
+        programarJtfCantidad();
         panelNvoDetalle.getJtfSubtotal().setText(detalle.getSubTotal() + "");
         panelNvoDetalle.getJtfCantidad().setText(detalle.getCantidadProducto() + "");
         panelNvoDetalle.getBtnEliminar().addActionListener(new ActionListener()
@@ -365,6 +369,7 @@ public class VtnCuentaAbierta extends javax.swing.JFrame
 
             }
         });
+
         panelDetalles.add(panelNvoDetalle);
         panelDetalles.add(Box.createRigidArea(new Dimension(0, 10))); // Espacio de 10px entre paneles
         panelDetalles.revalidate();
@@ -390,20 +395,28 @@ public class VtnCuentaAbierta extends javax.swing.JFrame
                 {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex)
         {
-            java.util.logging.Logger.getLogger(VtnCuentaAbierta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VtnCuentaAbierta.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex)
         {
-            java.util.logging.Logger.getLogger(VtnCuentaAbierta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VtnCuentaAbierta.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex)
         {
-            java.util.logging.Logger.getLogger(VtnCuentaAbierta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VtnCuentaAbierta.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex)
         {
-            java.util.logging.Logger.getLogger(VtnCuentaAbierta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VtnCuentaAbierta.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>

@@ -9,6 +9,7 @@ import java.awt.Component;
 import java.awt.Container;
 import javax.swing.Box;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 /**
@@ -17,6 +18,16 @@ import javax.swing.JTextField;
  */
 public class PanelDetalle extends javax.swing.JPanel
 {
+
+    public JLabel getLblNombreProducto()
+    {
+        return lblNombreProducto;
+    }
+
+    public void setLblNombreProducto(JLabel lblNombreProducto)
+    {
+        this.lblNombreProducto = lblNombreProducto;
+    }
 
     /**
      * Creates new form detalle
@@ -178,15 +189,12 @@ public class PanelDetalle extends javax.swing.JPanel
     private void jtfCantidadKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jtfCantidadKeyPressed
     {//GEN-HEADEREND:event_jtfCantidadKeyPressed
         // TODO add your handling code here:
-           Validaciones.validaCopyPaste(evt, null,jtfCantidad );
-
     }//GEN-LAST:event_jtfCantidadKeyPressed
 
     private void jtfCantidadKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jtfCantidadKeyTyped
     {//GEN-HEADEREND:event_jtfCantidadKeyTyped
         // TODO add your handling code here:
-                Validaciones.validaEntero(evt);
-             
+           
     }//GEN-LAST:event_jtfCantidadKeyTyped
 
     public JTextField getJtfSubtotal()
