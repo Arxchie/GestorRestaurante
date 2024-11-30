@@ -46,7 +46,7 @@ public class VtnCuentaAbierta extends javax.swing.JFrame
 
     public Image getIconImage()
     {
-        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Imagenes/Logo.png"));
+        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("imagenes/Logo.png"));
         return retValue;
     }
 

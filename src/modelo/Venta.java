@@ -14,10 +14,6 @@ public class Venta implements Serializable
     private float subTotal;
     private float total;
     private List<DetalleVenta> detallesVenta;
-    
-    
-    
-    
     private double descuento;
 
     public Venta(long codigoVenta, Date fecha, String anotaciones, float subTotal, float total, /*List<DetalleVenta> detallesVenta,*/ double descuento)
