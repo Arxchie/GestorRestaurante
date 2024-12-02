@@ -84,6 +84,10 @@ public class VtnVerProductos extends javax.swing.JFrame
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter()
         {
+            public void windowActivated(java.awt.event.WindowEvent evt)
+            {
+                formWindowActivated(evt);
+            }
             public void windowOpened(java.awt.event.WindowEvent evt)
             {
                 formWindowOpened(evt);
@@ -181,7 +185,7 @@ public class VtnVerProductos extends javax.swing.JFrame
 
     private void formWindowOpened(java.awt.event.WindowEvent evt)//GEN-FIRST:event_formWindowOpened
     {//GEN-HEADEREND:event_formWindowOpened
-        llenarTablaProductos();
+//        llenarTablaProductos();
     }//GEN-LAST:event_formWindowOpened
 
     private void tablaProductosMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tablaProductosMouseClicked
@@ -229,6 +233,12 @@ public class VtnVerProductos extends javax.swing.JFrame
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt)//GEN-FIRST:event_formWindowActivated
+    {//GEN-HEADEREND:event_formWindowActivated
+        // TODO add your handling code here:
+         llenarTablaProductos();
+    }//GEN-LAST:event_formWindowActivated
     public void abrirSiguienteVentana(JFrame ventana)
     {
         ventana.setVisible(true);

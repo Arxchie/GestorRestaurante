@@ -8,6 +8,7 @@ import cjb.ci.BtnEntero;
 import cjb.ci.Mensajes;
 import cjb.ci.Validaciones;
 import dao.ProductoDAO;
+import dao.VentaDAO;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -224,18 +225,54 @@ public class VtnCuentaAbierta extends javax.swing.JFrame
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+        VentaDAO dao = new VentaDAO();
+    ProductoDAO daoProducto = new ProductoDAO();
 
     private void btnPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarActionPerformed
         // TODO add your handling code here:
 
-        if (Mensajes.pregunta(this, "Desea Finalizar la venta?") == 0)
+        if (venta.isValida())
         {
-            System.out.println("Venta Finalizada");
+            if (Mensajes.pregunta(this, "Desea Finalizar la venta?") == 0)
+            {
+                int id = dao.guardarVenta(venta);
+                if (id != -1)
+                {
+                    dao.guardarDetallesVenta(id, venta.getDetallesVenta());
+                    actualizarStockProductosEnBD(venta.getDetallesVenta());
+                    Mensajes.exito(this, "Venta guardada con éxito");
+                    Venta nvaVenta = new Venta();
+                    venta = nvaVenta;
+
+                    repintarVistaDetalles();
+
+                }
+            }
+        } else
+        {
+            Mensajes.error(this, "Debe agregar productos");
         }
+
+
     }//GEN-LAST:event_btnPagarActionPerformed
 
+    private void actualizarStockProductosEnBD(List<DetalleVenta> detallesVenta)
+    {
+        for (DetalleVenta detalle : detallesVenta)
+        {
+            boolean actualizado = daoProducto.actualizarCantidadProducto(detalle.getProducto().getCodigo(), detalle.getCantidadProducto());
+            if (!actualizado)
+            {
+                System.err.println("No se pudo actualizar el inventario del producto con código: " + detalle.getProducto().getCodigo());
+            }
+        }
+
+    }
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        dispose();
+        new VtnVistaEmpleado().setVisible(true);
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jMenu1MouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jMenu1MouseClicked
@@ -255,8 +292,14 @@ public class VtnCuentaAbierta extends javax.swing.JFrame
 
     }
 
-    private void programarJtfCantidad()
+    public void setCantidadDetalleVenta(String nombreProducto, int nvaCantidad)
     {
+        DetalleVenta detalle = venta.buscarDetallePorNombre(nombreProducto);
+        if (detalle != null)
+        {
+            detalle.setCantidadProducto(nvaCantidad);
+        }
+        System.out.println(detalle.getProducto().getNombre() + " " + detalle.getCantidadProducto());
 
     }
 
@@ -292,35 +335,42 @@ public class VtnCuentaAbierta extends javax.swing.JFrame
     private void agregarProductoAventa(int cantidad)
     {
         Producto producto = vtnProductos.obtenerProductoSeleccionado();
-        if (producto != null)
+        if (producto.getCantidadStock() == 0)
         {
-            if (venta.buscarDetallePorNombre(producto.getNombre()) != null)
-            {
-                if (venta.buscarDetallePorNombre(producto.getNombre()).getCantidadProducto() >= producto.getCantidadStock())
-                {
-                    Mensajes.error(this, "la cantidad en inventario es insuficiente");
-                } else
-                {
-                    DetalleVenta nvoDetalle = new DetalleVenta(producto, cantidad);
-                    venta.agregarDetalle(nvoDetalle);
-
-                    repintarVistaDetalles();
-                }
-            } else
-            {
-                if (producto.getCantidadStock() > 0)
-                {
-                    DetalleVenta nvoDetalle = new DetalleVenta(producto, 1);
-                    venta.agregarDetalle(nvoDetalle);
-                    repintarVistaDetalles();
-                }
-            }
-
-            System.out.println(venta.toString());
+            Mensajes.error(this, "la cantidad en inventario es insuficiente");
 
         } else
         {
-            System.out.println("ninguno Seleccionado");
+            if (producto != null)
+            {
+                if (venta.buscarDetallePorNombre(producto.getNombre()) != null)
+                {
+                    if (venta.buscarDetallePorNombre(producto.getNombre()).getCantidadProducto() >= producto.getCantidadStock())
+                    {
+                        Mensajes.error(this, "la cantidad en inventario es insuficiente");
+                    } else
+                    {
+                        DetalleVenta nvoDetalle = new DetalleVenta(producto, cantidad);
+                        venta.agregarDetalle(nvoDetalle);
+
+                        repintarVistaDetalles();
+                    }
+                } else
+                {
+                    if (producto.getCantidadStock() > 0)
+                    {
+                        DetalleVenta nvoDetalle = new DetalleVenta(producto, 1);
+                        venta.agregarDetalle(nvoDetalle);
+                        repintarVistaDetalles();
+                    }
+                }
+
+                System.out.println(venta.toString());
+
+            } else
+            {
+                System.out.println("ninguno Seleccionado");
+            }
         }
     }
 
@@ -336,9 +386,9 @@ public class VtnCuentaAbierta extends javax.swing.JFrame
         lblSub.setText("");
         jtfTotal.setText("");
 
+        panelDetalles.removeAll();
         if (!detalles.isEmpty())
         {
-            panelDetalles.removeAll();
             for (DetalleVenta d : detalles)
             {
                 agregarDetalleAPanel(d);
@@ -350,13 +400,14 @@ public class VtnCuentaAbierta extends javax.swing.JFrame
             System.out.println("TOTAL: " + String.format("%.1f", venta.getTotal()));
 
         }
+        panelDetalles.revalidate();
+        panelDetalles.repaint();
     }
     PanelDetalle panelNvoDetalle;
 
     private void agregarDetalleAPanel(DetalleVenta detalle)
     {
         panelNvoDetalle = new PanelDetalle(detalle.getProducto().getNombre(), detalle.getProducto().getPrecioVenta() + "");
-        programarJtfCantidad();
         panelNvoDetalle.getJtfSubtotal().setText(detalle.getSubTotal() + "");
         panelNvoDetalle.getJtfCantidad().setText(detalle.getCantidadProducto() + "");
         panelNvoDetalle.getBtnEliminar().addActionListener(new ActionListener()

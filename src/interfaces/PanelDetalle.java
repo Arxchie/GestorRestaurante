@@ -84,6 +84,7 @@ public class PanelDetalle extends javax.swing.JPanel
         jtfCantidad.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jtfCantidad.setText("1");
         jtfCantidad.setToolTipText("");
+        jtfCantidad.setFocusable(false);
         jtfCantidad.setPreferredSize(new java.awt.Dimension(70, 25));
         jtfCantidad.addActionListener(new java.awt.event.ActionListener()
         {

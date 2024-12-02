@@ -20,19 +20,35 @@ import modelo.Producto;
 public class VentaDAO
 {
 
-    public boolean guardarVenta(Venta venta)
+    public int guardarVenta(Venta venta)
     {
         if (venta != null)
         {
             String sql = "INSERT INTO Venta (Fecha, Anotaciones, Subtotal, Total) VALUES (?, ?, ?, ?)";
-            try (Connection conn = Conexion.conectar(); PreparedStatement pstm = conn.prepareStatement(sql))
+            try (Connection conn = Conexion.conectar(); PreparedStatement pstm = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS))
             {
-                pstm.setDate(1, new java.sql.Date(venta.getFecha().getTime())); 
-                pstm.setString(2, venta.getAnotaciones()); 
-                pstm.setDouble(3, venta.getSubTotal()); 
-                pstm.setDouble(4, venta.getTotal()); 
 
-                return pstm.executeUpdate() > 0;
+                pstm.setDate(1, new java.sql.Date(venta.getFecha().getTime()));
+                pstm.setString(2, venta.getAnotaciones());
+                pstm.setDouble(3, venta.getSubTotal());
+                pstm.setDouble(4, venta.getTotal());
+
+                int affectedRows = pstm.executeUpdate();
+                if (affectedRows > 0)
+                {
+                    // Obtener el ID generado
+                    try (ResultSet rs = pstm.getGeneratedKeys())
+                    {
+                        if (rs.next())
+                        {
+                            return rs.getInt(1); // Retornar el ID de la venta
+                        }
+                    }
+                } else
+                {
+                    System.out.println("No se pudo insertar la venta.");
+                }
+
             } catch (SQLException e)
             {
                 e.printStackTrace();
@@ -41,6 +57,38 @@ public class VentaDAO
         } else
         {
             System.out.println("La venta proporcionada es nula.");
+        }
+        return -1; // Indica error
+    }
+
+    public boolean guardarDetallesVenta(int idVenta, List<DetalleVenta> detallesVenta)
+    {
+        if (idVenta > 0 && detallesVenta != null && !detallesVenta.isEmpty())
+        {
+            String sql = "INSERT INTO DetalleVenta (IdProducto, Cantidad, PrecioUnitario,CodigoVenta) VALUES (?, ?, ?, ?)";
+            try (Connection conn = Conexion.conectar(); PreparedStatement pstm = conn.prepareStatement(sql))
+            {
+
+                for (DetalleVenta detalle : detallesVenta)
+                {
+                    pstm.setLong(1, detalle.getProducto().getCodigo());
+                    pstm.setInt(2, detalle.getCantidadProducto());
+                    pstm.setDouble(3, detalle.getProducto().getPrecioVenta()); 
+                    pstm.setLong(4, idVenta);
+
+                    pstm.addBatch(); // Añadir al batch
+                }
+                pstm.executeBatch(); // Ejecutar batch
+                return true;
+
+            } catch (SQLException e)
+            {
+                e.printStackTrace();
+                System.out.println("Error al guardar los detalles de la venta: " + e.getMessage());
+            }
+        } else
+        {
+            System.out.println("El ID de la venta o los detalles proporcionados son inválidos.");
         }
         return false;
     }

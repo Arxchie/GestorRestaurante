@@ -17,7 +17,8 @@ import java.util.List;
  */
 public class ProductoDAO implements IServicioProductos
 {
-    public List<Producto>obtenerTodosLosProductos()
+
+    public List<Producto> obtenerTodosLosProductos()
     {
         List<Producto> productos = new ArrayList<>();
         String sql = "SELECT CodigoProductos, Nombre, Categoria, Costo, Precio, Descripcion, CantidadInventario, UnidadDeMedida FROM Productos";
@@ -91,6 +92,24 @@ public class ProductoDAO implements IServicioProductos
         } catch (SQLException e)
         {
             System.err.println("Error al eliminar el producto: " + e.getMessage());
+        }
+    }
+
+    public boolean actualizarCantidadProducto(long codigoProducto, int cantidadVendida)
+    {
+        String sql = "UPDATE Productos SET CantidadInventario = CantidadInventario - ? WHERE CodigoProductos = ?";
+
+        try (Connection conn = Conexion.conectar(); PreparedStatement pstmt = conn.prepareStatement(sql))
+        {
+            pstmt.setInt(1, cantidadVendida); // La cantidad a descontar
+            pstmt.setLong(2, codigoProducto); // Código del producto
+
+            int affectedRows = pstmt.executeUpdate();
+            return affectedRows > 0;
+        } catch (SQLException e)
+        {
+            System.err.println("Error al actualizar la cantidad del producto: " + e.getMessage());
+            return false;
         }
     }
 
@@ -290,14 +309,14 @@ public class ProductoDAO implements IServicioProductos
             {
                 if (rs.next())
                 {
-                    return rs.getInt("total") > 0; 
+                    return rs.getInt("total") > 0;
                 }
             }
         } catch (SQLException e)
         {
             System.err.println("Error al verificar el nombre del producto: " + e.getMessage());
         }
-        return false; 
+        return false;
     }
 
 }
