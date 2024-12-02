@@ -9,6 +9,7 @@ import modelo.Venta;
 import java.sql.*;
 import java.util.Date;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import modelo.DetalleVenta;
 import modelo.Producto;
@@ -27,6 +28,10 @@ public class VentaDAO
             String sql = "INSERT INTO Venta (Fecha, Anotaciones, Subtotal, Total) VALUES (?, ?, ?, ?)";
             try (Connection conn = Conexion.conectar(); PreparedStatement pstm = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS))
             {
+                pstm.setDate(1, new java.sql.Date(venta.getFecha().getTime()));
+                pstm.setString(2, venta.getAnotaciones());
+                pstm.setDouble(3, venta.getSubTotal());
+                pstm.setDouble(4, venta.getTotal());
 
                 pstm.setDate(1, new java.sql.Date(venta.getFecha().getTime()));
                 pstm.setString(2, venta.getAnotaciones());
@@ -105,6 +110,46 @@ public class VentaDAO
 
         dao.guardarVenta(venta);
 
+    }
+
+    public double obtenerTotalVentas()
+    {
+        double totalVentas = 0.0;
+        String sql = "SELECT SUM(Total) AS totalVentas FROM Venta";
+
+        try (Connection conn = Conexion.conectar(); PreparedStatement pstm = conn.prepareStatement(sql); ResultSet rs = pstm.executeQuery())
+        {
+            if (rs.next())
+            {
+                totalVentas = rs.getDouble("totalVentas");
+            }
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+            System.out.println("Error al obtener el total de ventas: " + e.getMessage());
+        }
+        return totalVentas;
+    }
+    
+    public List<Long> obtenerVentasSinCorte()
+    {
+        List<Long> idsVentas = new ArrayList<>();
+        String sql = "SELECT IdVenta FROM Venta "
+                + "WHERE IdVenta NOT IN (SELECT IdVenta FROM DetalleCorte)";
+
+        try (Connection conn = Conexion.conectar(); PreparedStatement pstm = conn.prepareStatement(sql); ResultSet rs = pstm.executeQuery())
+        {
+            while (rs.next())
+            {
+                idsVentas.add(rs.getLong("IdVenta"));
+            }
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+            System.out.println("Error al obtener ventas sin corte: " + e.getMessage());
+        }
+
+        return idsVentas;
     }
 
 }

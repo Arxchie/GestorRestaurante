@@ -58,10 +58,7 @@ public class VtnMesas extends javax.swing.JFrame
     {
         this.agregarMesa = agregarMesa;
         this.jButtonEliminar = jButtonEliminar;
-        this.jLabel1 = jLabel1;
-        this.jLabel4 = jLabel4;
         this.jLabel5 = jLabel5;
-        this.jLabel6 = jLabel6;
         this.jPanel1 = jPanel1;
         this.jScrollPane1 = jScrollPane1;
         this.panelMesas = panelMesas;
@@ -97,7 +94,7 @@ public class VtnMesas extends javax.swing.JFrame
             List<JButton> botonesCargados = gestorBotones.cargarBotones("mesas.dat", panelMesas, (ActionEvent e) ->
             {
                 // Si es necesario manejar otros eventos al hacer clic
-                
+
             });
 
             for (JButton boton : botonesCargados)
@@ -139,12 +136,13 @@ public class VtnMesas extends javax.swing.JFrame
         jPanel1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         agregarMesa = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         panelMesas = new javax.swing.JPanel();
         jButtonEliminar = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -178,32 +176,6 @@ public class VtnMesas extends javax.swing.JFrame
         });
         jPanel1.add(agregarMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, 210, 40));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/boton rojo.png"))); // NOI18N
-        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
-                jLabel1MouseClicked(evt);
-            }
-        });
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/boton amarillo.png"))); // NOI18N
-        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel4.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
-                jLabel4MouseClicked(evt);
-            }
-        });
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, -1, -1));
-
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/boton verde.png"))); // NOI18N
-        jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, -1, -1));
-
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         panelMesas.setBackground(new java.awt.Color(255, 255, 255));
@@ -236,7 +208,35 @@ public class VtnMesas extends javax.swing.JFrame
         });
         jPanel1.add(jButtonEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, 210, 40));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 500));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 480));
+
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/boton rojo.png"))); // NOI18N
+        jMenu1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jMenu1.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                jMenu1MouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/boton amarillo.png"))); // NOI18N
+        jMenu2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jMenu2.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                jMenu2MouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jMenu2);
+
+        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/boton verde.png"))); // NOI18N
+        jMenu3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jMenuBar1.add(jMenu3);
+
+        setJMenuBar(jMenuBar1);
 
         pack();
         setLocationRelativeTo(null);
@@ -288,7 +288,7 @@ public class VtnMesas extends javax.swing.JFrame
             if (venta != null)
             {
                 System.out.println("Venta asociada: " + venta);
-               
+
                 System.out.println("Total: " + venta.getTotal());
             } else
             {
@@ -348,16 +348,6 @@ public class VtnMesas extends javax.swing.JFrame
         panelMesas.repaint();
     }
 
-    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jLabel1MouseClicked
-    {//GEN-HEADEREND:event_jLabel1MouseClicked
-        System.exit(0);
-    }//GEN-LAST:event_jLabel1MouseClicked
-
-    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jLabel4MouseClicked
-    {//GEN-HEADEREND:event_jLabel4MouseClicked
-        this.setState(JFrame.ICONIFIED);
-    }//GEN-LAST:event_jLabel4MouseClicked
-
     private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonEliminarActionPerformed
     {//GEN-HEADEREND:event_jButtonEliminarActionPerformed
         // TODO add your handling code here:
@@ -401,6 +391,16 @@ public class VtnMesas extends javax.swing.JFrame
         cargarMesas();
 
     }//GEN-LAST:event_formWindowOpened
+
+    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jMenu1MouseClicked
+    {//GEN-HEADEREND:event_jMenu1MouseClicked
+        dispose();
+    }//GEN-LAST:event_jMenu1MouseClicked
+
+    private void jMenu2MouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jMenu2MouseClicked
+    {//GEN-HEADEREND:event_jMenu2MouseClicked
+        this.setState(JFrame.ICONIFIED);
+    }//GEN-LAST:event_jMenu2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -465,10 +465,11 @@ public class VtnMesas extends javax.swing.JFrame
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton agregarMesa;
     private javax.swing.JButton jButtonEliminar;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel panelMesas;

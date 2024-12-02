@@ -234,6 +234,23 @@ public class Venta implements Serializable
         return (float) (subTotal * porcentajeImpuesto);
     }
 
+    public void setCodigoVenta(long codigoVenta)
+    {
+        this.codigoVenta = codigoVenta;
+    }
+
+    public void setSubTotal(float subTotal)
+    {
+        this.subTotal = subTotal;
+    }
+
+    public void setTotal(float total)
+    {
+        this.total = total;
+    }
+    
+    
+
     @Override
     public String toString()
     {

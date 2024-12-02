@@ -14,6 +14,7 @@ import java.sql.SQLException;
  */
 public class Conexion
 {
+
     // Ruta al archivo de base de datos Access
     private static final String PATH = "src/BD/Proyecto.accdb";
     // URL de conexión con el protocolo UCanAccess

@@ -22,5 +22,5 @@ public interface IServicioVentas
     double calcularIngresosTotales(); 
     List<Venta> buscarVentasPorFecha(LocalDate fecha); 
     List<Venta> buscarVentasPorRangoDeFecha(LocalDate fechaInicial,LocalDate fechaFinal); 
-    
+    double obtenerTotalVentas();
 }

@@ -37,6 +37,28 @@ public class EmpleadoDAO implements IServicioEmpleado
     }
 
     @Override
+    public List<String> obtenerNombresEmpleados()
+    {
+        List<String> nombres = new ArrayList<>();
+        String sql = "SELECT Nombre FROM Empleados";
+
+        try (Connection conn = Conexion.conectar(); PreparedStatement pstm = conn.prepareStatement(sql); ResultSet rs = pstm.executeQuery())
+        {
+
+            while (rs.next())
+            {
+                nombres.add(rs.getString("Nombre"));
+            }
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+            System.out.println("Error al obtener nombres de empleados: " + e.getMessage());
+        }
+
+        return nombres;
+    }
+
+    @Override
     public boolean eliminarEmpleado(long idEmpleado)
     {
         String sql = "DELETE FROM Empleados WHERE IdEmpleado = ?";
@@ -209,6 +231,31 @@ public class EmpleadoDAO implements IServicioEmpleado
             System.err.println("Error al verificar el número: " + e.getMessage());
         }
         return false;
+    }
+
+    @Override
+    public long obtenerIdEmpleadoPorNombre(String nombreEmpleado)
+    {
+        String sql = "SELECT IdEmpleado FROM Empleados WHERE Nombre = ?";
+        long idEmpleado = -1;
+
+        try (Connection conn = Conexion.conectar(); PreparedStatement pstmt = conn.prepareStatement(sql))
+        {
+
+            pstmt.setString(1, nombreEmpleado);
+            try (ResultSet rs = pstmt.executeQuery())
+            {
+                if (rs.next())
+                {
+                    idEmpleado = rs.getLong("IdEmpleado");
+                }
+            }
+
+        } catch (SQLException e)
+        {
+            System.err.println("Error al obtener el ID del empleado: " + e.getMessage());
+        }
+        return idEmpleado;
     }
 
 }
