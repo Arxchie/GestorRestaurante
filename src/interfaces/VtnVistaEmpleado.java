@@ -155,6 +155,13 @@ public class VtnVistaEmpleado extends javax.swing.JFrame
         corte.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         corte.setText("Corte de caja");
         corte.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        corte.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                corteActionPerformed(evt);
+            }
+        });
         jMenu1.add(corte);
 
         jMenuBar1.add(jMenu1);
@@ -205,6 +212,12 @@ public class VtnVistaEmpleado extends javax.swing.JFrame
         dispose();
         new VtnLogin().setVisible(true);
     }//GEN-LAST:event_btnVolverActionPerformed
+
+    private void corteActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_corteActionPerformed
+    {//GEN-HEADEREND:event_corteActionPerformed
+        // TODO add your handling code here:
+        new VtnCorteCaja().setVisible(true);
+    }//GEN-LAST:event_corteActionPerformed
 
     /**
      * @param args the command line arguments
