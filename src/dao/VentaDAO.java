@@ -78,7 +78,7 @@ public class VentaDAO
                 {
                     pstm.setLong(1, detalle.getProducto().getCodigo());
                     pstm.setInt(2, detalle.getCantidadProducto());
-                    pstm.setDouble(3, detalle.getProducto().getPrecioVenta()); 
+                    pstm.setDouble(3, detalle.getProducto().getPrecioVenta());
                     pstm.setLong(4, idVenta);
 
                     pstm.addBatch(); // Añadir al batch
@@ -115,7 +115,9 @@ public class VentaDAO
     public double obtenerTotalVentas()
     {
         double totalVentas = 0.0;
-        String sql = "SELECT SUM(Total) AS totalVentas FROM Venta";
+        String sql = "SELECT SUM(Total) AS totalVentas "
+                + "FROM Venta v "
+                + "WHERE v.IdVenta NOT IN (SELECT dc.IdVenta FROM DetalleCorte dc)";
 
         try (Connection conn = Conexion.conectar(); PreparedStatement pstm = conn.prepareStatement(sql); ResultSet rs = pstm.executeQuery())
         {
@@ -126,11 +128,11 @@ public class VentaDAO
         } catch (SQLException e)
         {
             e.printStackTrace();
-            System.out.println("Error al obtener el total de ventas: " + e.getMessage());
+            System.out.println("Error al obtener el total de ventas sin corte: " + e.getMessage());
         }
         return totalVentas;
     }
-    
+
     public List<Long> obtenerVentasSinCorte()
     {
         List<Long> idsVentas = new ArrayList<>();

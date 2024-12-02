@@ -393,7 +393,7 @@ public class VtnOpccionesAdmin extends javax.swing.JFrame
 
     private void actCantidadActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_actCantidadActionPerformed
     {//GEN-HEADEREND:event_actCantidadActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here:    
     }//GEN-LAST:event_actCantidadActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed

@@ -294,6 +294,8 @@ public class VtnCorteCaja extends javax.swing.JFrame
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    
+    
     private void jtfTotalVentasActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jtfTotalVentasActionPerformed
     {//GEN-HEADEREND:event_jtfTotalVentasActionPerformed
         // TODO add your handling code here:
