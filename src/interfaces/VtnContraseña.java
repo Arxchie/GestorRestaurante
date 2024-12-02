@@ -5,6 +5,7 @@
 package interfaces;
 
 import cjb.ci.CtrlInterfaz;
+import cjb.ci.Mensajes;
 import controlador.controladorLogin;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -180,7 +181,7 @@ public class VtnContraseña extends javax.swing.JFrame
             System.out.println("inicado");
         } else
         {
-            System.out.println("Contraseña Erronea");
+            Mensajes.error(this, "Contraseña erronea");
         }
     }//GEN-LAST:event_btnAceptarActionPerformed
 

@@ -127,6 +127,8 @@ public class VtnLogin extends javax.swing.JFrame
     private void btnPersonalActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnPersonalActionPerformed
     {//GEN-HEADEREND:event_btnPersonalActionPerformed
         // TODO add your handling code here:
+        dispose();
+        new VtnVistaEmpleado().setVisible(true);
     }//GEN-LAST:event_btnPersonalActionPerformed
 
     private void botonAdminActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_botonAdminActionPerformed

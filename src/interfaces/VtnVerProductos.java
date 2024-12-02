@@ -222,22 +222,32 @@ public class VtnVerProductos extends javax.swing.JFrame
     {
         this.btnBotonProgramable = btnBotonProgramable;
     }
- 
+
     private void btnBotonProgramableActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnBotonProgramableActionPerformed
     {//GEN-HEADEREND:event_btnBotonProgramableActionPerformed
-   
+        if (jTextField1.getText().isEmpty())
+        {
+            int seleccionado = tablaProductos.getSelectedRow();
+            llenarTablaProductos();
+            if (seleccionado != -1)
+            {
+                tablaProductos.setRowSelectionInterval(seleccionado, seleccionado);
+            }
+        }
+            
     }//GEN-LAST:event_btnBotonProgramableActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
     {//GEN-HEADEREND:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        jTextField1.setText("");
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt)//GEN-FIRST:event_formWindowActivated
     {//GEN-HEADEREND:event_formWindowActivated
         // TODO add your handling code here:
-         llenarTablaProductos();
+        llenarTablaProductos();
     }//GEN-LAST:event_formWindowActivated
     public void abrirSiguienteVentana(JFrame ventana)
     {
@@ -274,7 +284,6 @@ public class VtnVerProductos extends javax.swing.JFrame
     public void llenarTablaProductos()
     {
         DefaultTableModel modeloTabla = (DefaultTableModel) tablaProductos.getModel();
-
         modeloTabla.setRowCount(0);
 
         ProductoDAO productoDAO = new ProductoDAO();

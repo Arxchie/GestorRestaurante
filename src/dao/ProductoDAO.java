@@ -112,6 +112,23 @@ public class ProductoDAO implements IServicioProductos
             return false;
         }
     }
+    public boolean insertarCantidadProducto(long codigoProducto, int cantidadVendida)
+    {
+        String sql = "UPDATE Productos SET CantidadInventario = CantidadInventario + ? WHERE CodigoProductos = ?";
+
+        try (Connection conn = Conexion.conectar(); PreparedStatement pstmt = conn.prepareStatement(sql))
+        {
+            pstmt.setInt(1, cantidadVendida); // La cantidad a descontar
+            pstmt.setLong(2, codigoProducto); // Código del producto
+
+            int affectedRows = pstmt.executeUpdate();
+            return affectedRows > 0;
+        } catch (SQLException e)
+        {
+            System.err.println("Error al actualizar la cantidad del producto: " + e.getMessage());
+            return false;
+        }
+    }
 
     @Override
     public boolean modificarProducto(Producto producto)

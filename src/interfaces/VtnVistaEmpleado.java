@@ -24,7 +24,7 @@ public class VtnVistaEmpleado extends javax.swing.JFrame
         initComponents();
         setIconImage(getIconImage());
     }
-    
+
     public Image getIconImage()
     {
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("imagenes/Logo.png"));
@@ -45,6 +45,7 @@ public class VtnVistaEmpleado extends javax.swing.JFrame
         Backgruond = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        btnVolver = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
@@ -76,6 +77,19 @@ public class VtnVistaEmpleado extends javax.swing.JFrame
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("VISTA EMPLEADO");
         Backgruond.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, 320, 50));
+
+        btnVolver.setBackground(new java.awt.Color(207, 181, 59));
+        btnVolver.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        btnVolver.setForeground(new java.awt.Color(255, 255, 255));
+        btnVolver.setText("Volver");
+        btnVolver.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnVolverActionPerformed(evt);
+            }
+        });
+        Backgruond.add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 520, 160, 40));
 
         getContentPane().add(Backgruond, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 580));
 
@@ -153,7 +167,15 @@ public class VtnVistaEmpleado extends javax.swing.JFrame
 
     private void ventaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ventaActionPerformed
         // TODO add your handling code here:
-        new VtnMesas().setVisible(true);
+        dispose();
+        
+        VtnCuentaAbierta nva = new VtnCuentaAbierta();
+        nva.getLblCerrar().addActionListener((e) ->
+        {
+            nva.cancelarVenta();
+            
+        });
+        nva.setVisible(true);
 
 
     }//GEN-LAST:event_ventaActionPerformed
@@ -161,6 +183,7 @@ public class VtnVistaEmpleado extends javax.swing.JFrame
     private void jMenu2MouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jMenu2MouseClicked
     {//GEN-HEADEREND:event_jMenu2MouseClicked
         System.exit(0);
+        
     }//GEN-LAST:event_jMenu2MouseClicked
 
     private void jMenu3MouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jMenu3MouseClicked
@@ -171,9 +194,17 @@ public class VtnVistaEmpleado extends javax.swing.JFrame
     private void jmVentaMesasActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jmVentaMesasActionPerformed
     {//GEN-HEADEREND:event_jmVentaMesasActionPerformed
         // TODO add your handling code here:
-        new VtnCuentaAbierta().setVisible(true);
-        
+        dispose();
+        new VtnMesas().setVisible(true);
+
     }//GEN-LAST:event_jmVentaMesasActionPerformed
+
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnVolverActionPerformed
+    {//GEN-HEADEREND:event_btnVolverActionPerformed
+        // TODO add your handling code here:
+        dispose();
+        new VtnLogin().setVisible(true);
+    }//GEN-LAST:event_btnVolverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -223,6 +254,7 @@ public class VtnVistaEmpleado extends javax.swing.JFrame
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Backgruond;
+    private javax.swing.JButton btnVolver;
     private javax.swing.JMenuItem corte;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

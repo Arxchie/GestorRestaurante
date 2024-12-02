@@ -93,7 +93,6 @@ public class VtnMesas extends javax.swing.JFrame
         {
             List<JButton> botonesCargados = gestorBotones.cargarBotones("mesas.dat", panelMesas, (ActionEvent e) ->
             {
-                // Si es necesario manejar otros eventos al hacer clic
 
             });
 
@@ -139,6 +138,7 @@ public class VtnMesas extends javax.swing.JFrame
         jScrollPane1 = new javax.swing.JScrollPane();
         panelMesas = new javax.swing.JPanel();
         jButtonEliminar = new javax.swing.JButton();
+        btnVolver = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -161,7 +161,7 @@ public class VtnMesas extends javax.swing.JFrame
         jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Mesas");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 10, 70, 30));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 10, 70, 30));
 
         agregarMesa.setBackground(new java.awt.Color(207, 181, 59));
         agregarMesa.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
@@ -193,7 +193,7 @@ public class VtnMesas extends javax.swing.JFrame
 
         jScrollPane1.setViewportView(panelMesas);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 50, 490, 410));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 50, 490, 410));
 
         jButtonEliminar.setBackground(new java.awt.Color(207, 181, 59));
         jButtonEliminar.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
@@ -207,6 +207,19 @@ public class VtnMesas extends javax.swing.JFrame
             }
         });
         jPanel1.add(jButtonEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, 210, 40));
+
+        btnVolver.setBackground(new java.awt.Color(207, 181, 59));
+        btnVolver.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        btnVolver.setForeground(new java.awt.Color(255, 255, 255));
+        btnVolver.setText("Volver");
+        btnVolver.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnVolverActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, 210, 40));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 480));
 
@@ -267,6 +280,7 @@ public class VtnMesas extends javax.swing.JFrame
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt)
             {
+                System.out.println("11" + nvaMesa);
                 manejarClickBotonMesa(evt, nvaMesa);
             }
         });
@@ -285,11 +299,35 @@ public class VtnMesas extends javax.swing.JFrame
         if (evt.getClickCount() == 2)
         { // Detectar doble clic
             Venta venta = (Venta) boton.getClientProperty("venta");
+
             if (venta != null)
             {
-                System.out.println("Venta asociada: " + venta);
+                dispose();
+                System.out.println(venta.toString());
+                VtnCuentaAbierta vtnCuenta = new VtnCuentaAbierta();
+                vtnCuenta.setVenta(venta);
+                vtnCuenta.repintarVistaDetalles();
+                for (ActionListener al : vtnCuenta.getBtnVolver().getActionListeners())
+                {
+                    vtnCuenta.getBtnVolver().removeActionListener(al);
+                }
+                vtnCuenta.getBtnVolver().addActionListener(new ActionListener()
+                {
+                    @Override
+                    public void actionPerformed(ActionEvent e)
 
-                System.out.println("Total: " + venta.getTotal());
+                    {
+
+                        boton.putClientProperty("venta", vtnCuenta.getVenta()); // Asociar la venta al botón
+                        //   System.out.println("Total "+vtnCuenta.getVenta().getTotal());
+                        guardarMesas();
+                       vtnCuenta.dispose();
+                        new VtnMesas().setVisible(true);
+                    }
+                });
+                // vtnCuenta.setVenta(venta);
+                vtnCuenta.setVisible(true);
+
             } else
             {
                 System.out.println("No hay una venta asociada.");
@@ -394,13 +432,21 @@ public class VtnMesas extends javax.swing.JFrame
 
     private void jMenu1MouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jMenu1MouseClicked
     {//GEN-HEADEREND:event_jMenu1MouseClicked
-        dispose();
+        // dispose();
+        System.exit(0);
     }//GEN-LAST:event_jMenu1MouseClicked
 
     private void jMenu2MouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jMenu2MouseClicked
     {//GEN-HEADEREND:event_jMenu2MouseClicked
         this.setState(JFrame.ICONIFIED);
     }//GEN-LAST:event_jMenu2MouseClicked
+
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnVolverActionPerformed
+    {//GEN-HEADEREND:event_btnVolverActionPerformed
+        // TODO add your handling code here:
+        dispose();
+        new VtnVistaEmpleado().setVisible(true);
+    }//GEN-LAST:event_btnVolverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -464,6 +510,7 @@ public class VtnMesas extends javax.swing.JFrame
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton agregarMesa;
+    private javax.swing.JButton btnVolver;
     private javax.swing.JButton jButtonEliminar;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JMenu jMenu1;

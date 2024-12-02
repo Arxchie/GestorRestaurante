@@ -21,6 +21,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
 import javax.swing.JOptionPane;
 import modelo.DetalleVenta;
 import modelo.Producto;
@@ -37,6 +38,16 @@ public class VtnCuentaAbierta extends javax.swing.JFrame
      * Creates new form CuentaAbierta
      */
     Venta venta = new Venta();
+
+    public Venta getVenta()
+    {
+        return venta;
+    }
+
+    public void setVenta(Venta venta)
+    {
+        this.venta = venta;
+    }
 
     public VtnCuentaAbierta()
     {
@@ -67,7 +78,7 @@ public class VtnCuentaAbierta extends javax.swing.JFrame
         jPanel1 = new javax.swing.JPanel();
         lblIVA = new javax.swing.JLabel();
         btnPagar = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnVolver = new javax.swing.JButton();
         btnAgregar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         panelDetalles = new javax.swing.JPanel();
@@ -78,7 +89,7 @@ public class VtnCuentaAbierta extends javax.swing.JFrame
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        lblCerrar = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
 
@@ -106,20 +117,20 @@ public class VtnCuentaAbierta extends javax.swing.JFrame
                 btnPagarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnPagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 470, 100, 30));
+        jPanel1.add(btnPagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 480, 110, 40));
 
-        jButton3.setBackground(new java.awt.Color(207, 181, 59));
-        jButton3.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Volver");
-        jButton3.addActionListener(new java.awt.event.ActionListener()
+        btnVolver.setBackground(new java.awt.Color(207, 181, 59));
+        btnVolver.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        btnVolver.setForeground(new java.awt.Color(255, 255, 255));
+        btnVolver.setText("Volver");
+        btnVolver.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jButton3ActionPerformed(evt);
+                btnVolverActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 470, 90, 30));
+        jPanel1.add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 480, 120, 40));
 
         btnAgregar.setBackground(new java.awt.Color(207, 181, 59));
         btnAgregar.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
@@ -132,7 +143,7 @@ public class VtnCuentaAbierta extends javax.swing.JFrame
                 btnAgregarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 470, 110, 30));
+        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 480, 110, 40));
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
@@ -179,16 +190,16 @@ public class VtnCuentaAbierta extends javax.swing.JFrame
         jLabel9.setText("IVA:");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 490, 50, 30));
 
-        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/boton rojo.png"))); // NOI18N
-        jMenu1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jMenu1.addMouseListener(new java.awt.event.MouseAdapter()
+        lblCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/boton rojo.png"))); // NOI18N
+        lblCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblCerrar.addMouseListener(new java.awt.event.MouseAdapter()
         {
             public void mouseClicked(java.awt.event.MouseEvent evt)
             {
-                jMenu1MouseClicked(evt);
+                lblCerrarMouseClicked(evt);
             }
         });
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(lblCerrar);
 
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/boton amarillo.png"))); // NOI18N
         jMenu2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -239,7 +250,6 @@ public class VtnCuentaAbierta extends javax.swing.JFrame
                 if (id != -1)
                 {
                     dao.guardarDetallesVenta(id, venta.getDetallesVenta());
-                    actualizarStockProductosEnBD(venta.getDetallesVenta());
                     Mensajes.exito(this, "Venta guardada con éxito");
                     Venta nvaVenta = new Venta();
                     venta = nvaVenta;
@@ -268,17 +278,54 @@ public class VtnCuentaAbierta extends javax.swing.JFrame
         }
 
     }
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+
+    public void cancelarVenta()
+    {
+        ProductoDAO dao = new ProductoDAO();
+        if (venta!=null)
+        {
+            for (DetalleVenta d : venta.getDetallesVenta())
+            {
+                dao.insertarCantidadProducto(d.getProducto().getCodigo(), d.getCantidadProducto());
+
+            }
+            
+        }
+    }
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         // TODO add your handling code here:
+        cancelarVenta();
         dispose();
         new VtnVistaEmpleado().setVisible(true);
 
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnVolverActionPerformed
 
-    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jMenu1MouseClicked
-    {//GEN-HEADEREND:event_jMenu1MouseClicked
-        dispose();
-    }//GEN-LAST:event_jMenu1MouseClicked
+    public JButton getBtnVolver()
+    {
+        return btnVolver;
+    }
+
+    public void setBtnVolver(JButton btnVolver)
+    {
+        this.btnVolver = btnVolver;
+    }
+
+    private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_lblCerrarMouseClicked
+    {//GEN-HEADEREND:event_lblCerrarMouseClicked
+      
+        System.exit(0);
+        
+    }//GEN-LAST:event_lblCerrarMouseClicked
+
+    public JMenu getLblCerrar()
+    {
+        return lblCerrar;
+    }
+
+    public void setLblCerrar(JMenu lblCerrar)
+    {
+        this.lblCerrar = lblCerrar;
+    }
 
     private void jMenu2MouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jMenu2MouseClicked
     {//GEN-HEADEREND:event_jMenu2MouseClicked
@@ -335,43 +382,43 @@ public class VtnCuentaAbierta extends javax.swing.JFrame
     private void agregarProductoAventa(int cantidad)
     {
         Producto producto = vtnProductos.obtenerProductoSeleccionado();
-        if (producto.getCantidadStock() == 0)
+
+        if (producto != null)
         {
-            Mensajes.error(this, "la cantidad en inventario es insuficiente");
+            if (producto.getCantidadStock() == 0)
+            {
+                Mensajes.error(this, "la cantidad en inventario es insuficiente");
+                return;
+
+            }
+            if (venta.buscarDetallePorNombre(producto.getNombre()) != null)
+            {
+                
+                    DetalleVenta nvoDetalle = new DetalleVenta(producto, cantidad);
+                    venta.agregarDetalle(nvoDetalle);
+                    ProductoDAO dao = new ProductoDAO();
+                    dao.actualizarCantidadProducto(producto.getCodigo(), cantidad);
+                    repintarVistaDetalles();
+                
+            } else
+            {
+                if (producto.getCantidadStock() > 0)
+                {
+                    DetalleVenta nvoDetalle = new DetalleVenta(producto, 1);
+                    ProductoDAO dao = new ProductoDAO();
+                    dao.actualizarCantidadProducto(producto.getCodigo(), cantidad);
+                    venta.agregarDetalle(nvoDetalle);
+                    repintarVistaDetalles();
+                }
+            }
+
+            System.out.println(venta.toString());
 
         } else
         {
-            if (producto != null)
-            {
-                if (venta.buscarDetallePorNombre(producto.getNombre()) != null)
-                {
-                    if (venta.buscarDetallePorNombre(producto.getNombre()).getCantidadProducto() >= producto.getCantidadStock())
-                    {
-                        Mensajes.error(this, "la cantidad en inventario es insuficiente");
-                    } else
-                    {
-                        DetalleVenta nvoDetalle = new DetalleVenta(producto, cantidad);
-                        venta.agregarDetalle(nvoDetalle);
-
-                        repintarVistaDetalles();
-                    }
-                } else
-                {
-                    if (producto.getCantidadStock() > 0)
-                    {
-                        DetalleVenta nvoDetalle = new DetalleVenta(producto, 1);
-                        venta.agregarDetalle(nvoDetalle);
-                        repintarVistaDetalles();
-                    }
-                }
-
-                System.out.println(venta.toString());
-
-            } else
-            {
-                System.out.println("ninguno Seleccionado");
-            }
+            System.out.println("ninguno Seleccionado");
         }
+
     }
 
     public JButton getBtnAgregarDetalle()
@@ -379,7 +426,7 @@ public class VtnCuentaAbierta extends javax.swing.JFrame
         return btnAgregar;
     }
 
-    private void repintarVistaDetalles()
+    public void repintarVistaDetalles()
     {
         List<DetalleVenta> detalles = venta.getDetallesVenta();
         lblIVA.setText("");
@@ -415,7 +462,10 @@ public class VtnCuentaAbierta extends javax.swing.JFrame
             @Override
             public void actionPerformed(ActionEvent e)
             {
+                ProductoDAO dao = new ProductoDAO();
                 venta.eliminarDetalle(detalle);
+                dao.insertarCantidadProducto(detalle.getProducto().getCodigo(), detalle.getCantidadProducto());
+
                 repintarVistaDetalles();
 
             }
@@ -485,18 +535,18 @@ public class VtnCuentaAbierta extends javax.swing.JFrame
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnPagar;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnVolver;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jtfTotal;
+    private javax.swing.JMenu lblCerrar;
     private javax.swing.JLabel lblIVA;
     private javax.swing.JLabel lblSub;
     private javax.swing.JPanel panelDetalles;
